@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.recite.mappers.UserMapper">
+    <resultMap id="BaseResultMap" type="com.study.recite.models.UserModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="token" jdbcType="VARCHAR" property="token" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+        <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+        <result column="is_deleted" jdbcType="CHAR" property="deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        t_sys_user_info.user_name ,
+        t_sys_user_info.password ,
+        t_sys_user_info.token ,
+        t_sys_user_info.created_by ,
+        t_sys_user_info.created_date ,
+        t_sys_user_info.updated_by ,
+        t_sys_user_info.updated_date ,
+        t_sys_user_info.is_deleted 
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_sys_user_info
+        WHERE STATUS = '1'
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_sys_user_info
+        WHERE STATUS = '1'
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE t_sys_user_info set STATUS = '1'
+    </delete>
+
+    <insert id="insert" parameterType="com.study.recite.models.UserModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        INSERT INTO  t_sys_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            user_name,
+            password,
+            token,
+            created_by,
+            created_date,
+            updated_by,
+            updated_date,
+            is_deleted,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{userName, jdbcType=VARCHAR},
+            #{password, jdbcType=VARCHAR},
+            #{token, jdbcType=VARCHAR},
+            #{createdBy, jdbcType=VARCHAR},
+            #{createdDate, jdbcType=TIMESTAMP},
+            #{updatedBy, jdbcType=VARCHAR},
+            #{updatedDate, jdbcType=TIMESTAMP},
+            #{deleted, jdbcType=CHAR},
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="java.util.Map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE  t_sys_user_info set
+        <trim suffix=" " suffixOverrides=",">
+        <if test="_parameter.containsKey('userName')">
+        user_name = #{userName, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('password')">
+        password = #{password, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('token')">
+        token = #{token, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('createdBy')">
+        created_by = #{createdBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('createdDate')">
+        created_date = #{createdDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('updatedBy')">
+        updated_by = #{updatedBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('updatedDate')">
+        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('deleted')">
+        is_deleted = #{deleted, jdbcType=CHAR},
+        </if>
+        </trim>
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.study.recite.models.UserModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE  t_sys_user_info set
+        <trim suffix=" " suffixOverrides=",">
+            user_name = #{userName, jdbcType=VARCHAR},
+            password = #{password, jdbcType=VARCHAR},
+            token = #{token, jdbcType=VARCHAR},
+            created_by = #{createdBy, jdbcType=VARCHAR},
+            created_date = #{createdDate, jdbcType=TIMESTAMP},
+            updated_by = #{updatedBy, jdbcType=VARCHAR},
+            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+            is_deleted = #{deleted, jdbcType=CHAR},
+        </trim>
+    </update>
+
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_sys_user_info
+        WHERE STATUS = '1' and user_name = #{userName, jdbcType=VARCHAR}
+    </select>
+</mapper>

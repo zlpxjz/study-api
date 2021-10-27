@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.recite.mappers.RecitePlanMapper">
+    <resultMap id="BaseResultMap" type="com.study.recite.models.RecitePlanModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        <result column="book_id" jdbcType="INTEGER" property="bookId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="plan_word_num" jdbcType="INTEGER" property="planWordNum" />
+        <result column="plan_phrase_num" jdbcType="INTEGER" property="planPhraseNum" />
+        <result column="total_word_num" jdbcType="INTEGER" property="totalWordNum" />
+        <result column="total_phrase_num" jdbcType="INTEGER" property="totalPhraseNum" />
+        <result column="recited_word_num" jdbcType="INTEGER" property="recitedWordNum" />
+        <result column="recited_phrase_num" jdbcType="INTEGER" property="recitedPhraseNum" />
+        <result column="repeat_times" jdbcType="INTEGER" property="repeatTimes" />
+        <result column="clockin_times" jdbcType="INTEGER" property="clockinTimes" />
+        <result column="recite_status" jdbcType="VARCHAR" property="reciteStatus" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+        <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+        <result column="is_deleted" jdbcType="CHAR" property="deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        t_en_recite_plan_info.book_id ,
+        t_en_recite_plan_info.user_id ,
+        t_en_recite_plan_info.plan_word_num ,
+        t_en_recite_plan_info.plan_phrase_num ,
+        t_en_recite_plan_info.total_word_num ,
+        t_en_recite_plan_info.total_phrase_num ,
+        t_en_recite_plan_info.recited_word_num ,
+        t_en_recite_plan_info.recited_phrase_num ,
+        t_en_recite_plan_info.repeat_times ,
+        t_en_recite_plan_info.clockin_times ,
+        t_en_recite_plan_info.recite_status ,
+        t_en_recite_plan_info.created_by ,
+        t_en_recite_plan_info.created_date ,
+        t_en_recite_plan_info.updated_by ,
+        t_en_recite_plan_info.updated_date ,
+        t_en_recite_plan_info.is_deleted 
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_recite_plan_info
+        WHERE STATUS = '1'
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_recite_plan_info
+        WHERE STATUS = '1'
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE t_en_recite_plan_info set STATUS = '0'
+    </delete>
+
+    <insert id="insert" parameterType="com.study.recite.models.RecitePlanModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        INSERT INTO  t_en_recite_plan_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            book_id,
+            user_id,
+            plan_word_num,
+            plan_phrase_num,
+            total_word_num,
+            total_phrase_num,
+            recited_word_num,
+            recited_phrase_num,
+            repeat_times,
+            clockin_times,
+            recite_status,
+            created_by,
+            created_date,
+            updated_by,
+            updated_date,
+            is_deleted,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{bookId, jdbcType=INTEGER},
+            #{userId, jdbcType=INTEGER},
+            #{planWordNum, jdbcType=INTEGER},
+            #{planPhraseNum, jdbcType=INTEGER},
+            #{totalWordNum, jdbcType=INTEGER},
+            #{totalPhraseNum, jdbcType=INTEGER},
+            #{recitedWordNum, jdbcType=INTEGER},
+            #{recitedPhraseNum, jdbcType=INTEGER},
+            #{repeatTimes, jdbcType=INTEGER},
+            #{clockinTimes, jdbcType=INTEGER},
+            #{reciteStatus, jdbcType=VARCHAR},
+            #{createdBy, jdbcType=VARCHAR},
+            #{createdDate, jdbcType=TIMESTAMP},
+            #{updatedBy, jdbcType=VARCHAR},
+            #{updatedDate, jdbcType=TIMESTAMP},
+            #{deleted, jdbcType=CHAR},
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="java.util.Map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE  t_en_recite_plan_info set
+        <trim suffix=" " suffixOverrides=",">
+        <if test="_parameter.containsKey('bookId')">
+        book_id = #{bookId, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('userId')">
+        user_id = #{userId, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('planWordNum')">
+        plan_word_num = #{planWordNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('planPhraseNum')">
+        plan_phrase_num = #{planPhraseNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('totalWordNum')">
+        total_word_num = #{totalWordNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('totalPhraseNum')">
+        total_phrase_num = #{totalPhraseNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('recitedWordNum')">
+        recited_word_num = #{recitedWordNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('recitedPhraseNum')">
+        recited_phrase_num = #{recitedPhraseNum, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('repeatTimes')">
+        repeat_times = #{repeatTimes, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('clockinTimes')">
+        clockin_times = #{clockinTimes, jdbcType=INTEGER},
+        </if>
+        <if test="_parameter.containsKey('reciteStatus')">
+        recite_status = #{reciteStatus, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('createdBy')">
+        created_by = #{createdBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('createdDate')">
+        created_date = #{createdDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('updatedBy')">
+        updated_by = #{updatedBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('updatedDate')">
+        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('deleted')">
+        is_deleted = #{deleted, jdbcType=CHAR},
+        </if>
+        </trim>
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.study.recite.models.RecitePlanModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        UPDATE  t_en_recite_plan_info set
+        <trim suffix=" " suffixOverrides=",">
+            book_id = #{bookId, jdbcType=INTEGER},
+            user_id = #{userId, jdbcType=INTEGER},
+            plan_word_num = #{planWordNum, jdbcType=INTEGER},
+            plan_phrase_num = #{planPhraseNum, jdbcType=INTEGER},
+            total_word_num = #{totalWordNum, jdbcType=INTEGER},
+            total_phrase_num = #{totalPhraseNum, jdbcType=INTEGER},
+            recited_word_num = #{recitedWordNum, jdbcType=INTEGER},
+            recited_phrase_num = #{recitedPhraseNum, jdbcType=INTEGER},
+            repeat_times = #{repeatTimes, jdbcType=INTEGER},
+            clockin_times = #{clockinTimes, jdbcType=INTEGER},
+            recite_status = #{reciteStatus, jdbcType=VARCHAR},
+            created_by = #{createdBy, jdbcType=VARCHAR},
+            created_date = #{createdDate, jdbcType=TIMESTAMP},
+            updated_by = #{updatedBy, jdbcType=VARCHAR},
+            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+            is_deleted = #{deleted, jdbcType=CHAR},
+        </trim>
+    </update>
+</mapper>
