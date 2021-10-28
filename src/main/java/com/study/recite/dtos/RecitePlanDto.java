@@ -1,5 +1,6 @@
 package com.study.recite.dtos;
 
+import com.study.recite.models.BookModel;
 import com.study.recite.models.RecitePlanModel;
 import lombok.Data;
 
@@ -20,10 +21,4 @@ public class RecitePlanDto {
 	private Integer repeatTimes;
 	private Integer clockinTimes;
 	private String reciteStatus;
-
-	public static RecitePlanDto build(RecitePlanModel planModel){
-		RecitePlanDto planDto = new RecitePlanDto();
-
-		return planDto;
-	}
 }

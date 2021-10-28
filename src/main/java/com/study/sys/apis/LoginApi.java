@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @Api("Login相关API")
+@RequestMapping(path="/user/")
 public class LoginApi {
 	@Autowired
 	private IUserAccountService userAccountService;
