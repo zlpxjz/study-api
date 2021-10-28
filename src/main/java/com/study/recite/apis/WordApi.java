@@ -27,14 +27,14 @@ public class WordApi extends BaseApi {
 
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
     @GetMapping(path="/{id}")
-    public ApiResponse get(@PathVariable("id") Integer Id) throws Exception{
+    public ApiResponse get(@PathVariable("id") String Id) throws Exception{
         WordModel model = wordService.getOne(Id);
         return ApiResponse.success(model);
     }
 
     @ApiOperation(value = "删除指定数据", notes = "删除指定数据")
     @DeleteMapping(path="/{id}")
-    public ApiResponse delete(@PathVariable("id") Integer id) throws Exception{
+    public ApiResponse delete(@PathVariable("id") String id) throws Exception{
         wordService.delete(id);
         return ApiResponse.success().setMessage("删除成功�?");
     }

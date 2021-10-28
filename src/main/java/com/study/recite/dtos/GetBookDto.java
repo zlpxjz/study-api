@@ -6,7 +6,7 @@ import lombok.Data;
  * Created by Tony on 2021/10/27.
  */
 @Data
-public class GetBookRequest {
+public class GetBookDto {
 	private String phase; //阶段
 	private String grade; //等级
 	private String course; //科目

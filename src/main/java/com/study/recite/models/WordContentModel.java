@@ -14,9 +14,9 @@ import javax.persistence.Table;
 @Data
 @Entity(name = "WordContent")
 @Table(name= "t_en_word_content_info")
-public class WordContentModel extends BaseModel<Integer> {
-	@Column(name="word_id", columnDefinition = "Integer(11) not null comment '单词'")
-	private Integer wordId;
+public class WordContentModel extends BaseModel<String> {
+	@Column(name="word_id", columnDefinition = "varchar(32) not null comment '单词'")
+	private String wordId;
 
 	@Column(name="category", columnDefinition = "varchar(16) not null comment '大类。音标、释义、词组短语、同近义词、同根词、词语辨析、双语例句'")
 	private String  category;

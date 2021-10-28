@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service("WordContentService")
 @Transactional(rollbackFor = Exception.class)
-public class WordContentServiceImpl extends BaseServiceImpl<Integer, WordContentModel, WordContentMapper> implements IWordContentService {
+public class WordContentServiceImpl extends BaseServiceImpl<String, WordContentModel, WordContentMapper> implements IWordContentService {
 
 }

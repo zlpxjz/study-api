@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Data
 @Entity(name = "Word")
 @Table(name= "t_en_word_info")
-public class WordModel extends BaseModel<Integer> {
+public class WordModel extends BaseModel<String> {
 	@Column(name="word", columnDefinition = "varchar(64) not null comment '词汇'")
 	private String  word;
 

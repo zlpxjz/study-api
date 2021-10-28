@@ -5,9 +5,9 @@ import com.study.recite.models.BookModel;
 /**
  * Created by Tony on 2021/10/27.
  */
-public class GetBookResponse {
-	public static GetBookResponse build(BookModel model){
-		GetBookResponse response = new GetBookResponse();
+public class BookDto {
+	public static BookDto build(BookModel model){
+		BookDto response = new BookDto();
 
 		return response;
 	}

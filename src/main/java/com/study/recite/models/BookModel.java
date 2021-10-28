@@ -14,9 +14,9 @@ import javax.persistence.Table;
 @Data
 @Entity(name = "Book")
 @Table(name= "t_book_info")
-public class BookModel extends BaseModel<Integer> {
-	@Column(name="parent_id", columnDefinition = "Integer(11) not null comment '关联书本'")
-	private Integer parentId;
+public class BookModel extends BaseModel<String> {
+	@Column(name="parent_id", columnDefinition = "varchar(32) not null comment '关联书本'")
+	private String parentId;
 
 	@Column(name="phase", columnDefinition = "varchar(32) not null comment '阶段。小学、初中、高中'")
 	private String phase;

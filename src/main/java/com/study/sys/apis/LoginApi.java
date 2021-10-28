@@ -1,9 +1,9 @@
 package com.study.sys.apis;
 
 import com.fasterapp.base.arch.ApiResponse;
-import com.study.sys.services.IUserService;
-import com.study.sys.dtos.LoginRequest;
-import com.study.sys.dtos.LoginResponse;
+import com.study.sys.services.IUserAccountService;
+import com.study.sys.dtos.LoginDto;
+import com.study.sys.dtos.UserDto;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("Login相关API")
 public class LoginApi {
 	@Autowired
-	private IUserService userService;
+	private IUserAccountService userAccountService;
 
 	@RequestMapping(path="/login")
-	public ApiResponse login(@RequestBody LoginRequest loginRequest) throws Exception{
-		LoginResponse response = userService.login(loginRequest);
+	public ApiResponse login(@RequestBody LoginDto loginDto) throws Exception{
+		UserDto response = userAccountService.login(loginDto);
 		return ApiResponse.success(response);
 	}
 

@@ -14,10 +14,10 @@ import javax.persistence.Table;
 @Data
 @Entity(name = "BookWord")
 @Table(name= "t_en_book_word_info")
-public class BookWordModel extends BaseModel<Integer> {
-	@Column(name="book_id", columnDefinition = "Integer(11) not null comment '书本'")
-	private Integer bookId;
+public class BookWordModel extends BaseModel<String> {
+	@Column(name="book_id", columnDefinition = "varchar(32) not null comment '书本'")
+	private String bookId;
 
-	@Column(name="word_id", columnDefinition = "Integer(11) not null comment '词汇'")
-	private Integer wordId;
+	@Column(name="word_id", columnDefinition = "varchar(32) not null comment '词汇'")
+	private String wordId;
 }

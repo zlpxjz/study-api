@@ -14,12 +14,16 @@ import javax.persistence.Table;
 @Data
 @Entity(name = "RecitePlan")
 @Table(name= "t_en_recite_plan_info")
-public class RecitePlanModel extends BaseModel<Integer> {
-	@Column(name="book_id", columnDefinition = "Integer(11) not null comment '关联书本'")
-	private Integer bookId;
+public class RecitePlanModel extends BaseModel<String> {
+	public static enum RECITE_STATUS{
+		未开始,进行中,暂停中,已结束
+	}
 
-	@Column(name="user_id", columnDefinition = "Integer(11) not null comment '用户ID'")
-	private Integer userId;
+	@Column(name="book_id", columnDefinition = "varchar(32) not null comment '关联书本'")
+	private String bookId;
+
+	@Column(name="user_id", columnDefinition = "varchar(32) not null comment '用户ID'")
+	private String userId;
 
 	@Column(name="plan_word_num", columnDefinition = "Integer(11) not null comment '计划词汇数量'")
 	private Integer planWordNum;

@@ -4,6 +4,6 @@ import com.study.recite.models.BookWordModel;
 
 import com.fasterapp.base.arch.mapper.BaseMapper;
 
-public interface BookWordMapper extends BaseMapper<Integer, BookWordModel> {
+public interface BookWordMapper extends BaseMapper<String, BookWordModel> {
 }
 

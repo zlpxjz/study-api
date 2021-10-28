@@ -2,7 +2,7 @@ package com.study.recite.apis;
 
 import com.fasterapp.base.arch.ApiResponse;
 import com.fasterapp.base.arch.api.BaseApi;
-import com.study.recite.models.RecitePlanModel;
+import com.study.recite.dtos.RecitePlanDto;
 import com.study.recite.services.IRecitePlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,20 +20,21 @@ public class RecitePlanApi extends BaseApi {
 
     @ApiOperation(value = "保存数据", notes = "保存数据")
     @PostMapping(path="/save")
-    public ApiResponse save(@RequestBody RecitePlanModel model) throws Exception{
-        recitePlanService.save(model);
+    public ApiResponse save(@RequestBody RecitePlanDto planDto) throws Exception{
+        recitePlanService.save(planDto);
         return ApiResponse.success().setMessage("保存成功");
     }
 
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
-    @GetMapping(path="/get")
+    @GetMapping
     public ApiResponse get() throws Exception{
-        return ApiResponse.success();
+        RecitePlanDto planDto = recitePlanService.get();
+        return ApiResponse.success(planDto);
     }
 
     @ApiOperation(value = "删除指定数据", notes = "删除指定数据")
     @GetMapping(path="/{id}/delete")
-    public ApiResponse delete(@PathVariable("id") Integer id) throws Exception{
+    public ApiResponse delete(@PathVariable("id") String id) throws Exception{
         recitePlanService.delete(id);
         return ApiResponse.success().setMessage("删除成功");
     }

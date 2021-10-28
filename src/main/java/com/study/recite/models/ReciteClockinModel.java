@@ -15,15 +15,15 @@ import java.util.Date;
 @Data
 @Entity(name = "ReciteClickin")
 @Table(name= "t_en_recite_clockin_info")
-public class ReciteClockinModel extends BaseModel<Integer> {
-	@Column(name="user_id", columnDefinition = "Integer(11) not null comment '用户ID'")
-	private Integer userId;
+public class ReciteClockinModel extends BaseModel<String> {
+	@Column(name="user_id", columnDefinition = "varchar(32) not null comment '用户ID'")
+	private String userId;
 
-	@Column(name="book_id", columnDefinition = "Integer(11) not null comment '打卡书本'")
-	private Integer bookId;
+	@Column(name="book_id", columnDefinition = "varchar(32) not null comment '打卡书本'")
+	private String bookId;
 
-	@Column(name="word_id", columnDefinition = "Integer(11) not null comment '打卡开始词汇ID'")
-	private Integer wordId;
+	@Column(name="word_id", columnDefinition = "varchar(32) not null comment '打卡开始词汇ID'")
+	private String wordId;
 
 	@Column(name="word_num", columnDefinition = "Integer(11) not null comment '打卡词汇数量'")
 	private Integer wordNum;

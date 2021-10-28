@@ -202,4 +202,22 @@
             is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
     </update>
+
+    <select id="selectByMap" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_recite_plan_info
+        WHERE is_deleted = 'N'
+
+        <if test="userId.length > 0">
+          and user_id =  #{userId, jdbcType=INTEGER}
+        </if>
+
+        <if test="status.length > 0">
+            and recite_status =  #{status, jdbcType=INTEGER}
+        </if>
+    </select>
 </mapper>
