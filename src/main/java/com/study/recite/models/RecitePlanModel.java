@@ -46,6 +46,9 @@ public class RecitePlanModel extends BaseModel<String> {
 	@Column(name="repeat_times", columnDefinition = "Integer(11) not null comment '重复次数'")
 	private Integer repeatTimes;
 
+	@Column(name="clockin_id", columnDefinition = "varchar(32) not null comment '最新打卡记录")
+	private String clockinId;
+
 	@Column(name="clockin_times", columnDefinition = "Integer(11) not null comment '打卡次数")
 	private Integer clockinTimes;
 

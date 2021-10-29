@@ -19,25 +19,34 @@ public class ReciteClockinModel extends BaseModel<String> {
 	@Column(name="user_id", columnDefinition = "varchar(32) not null comment '用户ID'")
 	private String userId;
 
+	@Column(name="plan_id", columnDefinition = "varchar(32) not null comment '学习ID'")
+	private String planId;
+
 	@Column(name="book_id", columnDefinition = "varchar(32) not null comment '打卡书本'")
 	private String bookId;
 
-	@Column(name="word_id", columnDefinition = "varchar(32) not null comment '打卡开始词汇ID'")
-	private String wordId;
+	@Column(name="first_word_id", columnDefinition = "varchar(32) not null comment '开始词汇ID'")
+	private String firstWordId;
 
-	@Column(name="word_num", columnDefinition = "Integer(11) not null comment '打卡词汇数量'")
+	@Column(name="last_word_id", columnDefinition = "varchar(32) not null comment '结束词汇ID'")
+	private String lastWordId;
+
+	@Column(name="word_num", columnDefinition = "Integer(11) not null comment '词汇数量'")
 	private Integer wordNum;
 
-	@Column(name="phrase_id", columnDefinition = "Integer(11) not null comment '打卡开始短语ID'")
-	private Integer phraseId;
+	@Column(name="first_phrase_id", columnDefinition = "Integer(11) not null comment '开始短语ID'")
+	private String firstPhraseId;
 
-	@Column(name="phrase_num", columnDefinition = "Integer(11) not null comment '打卡短语数量'")
+	@Column(name="last_phrase_id", columnDefinition = "Integer(11) not null comment '结束短语ID'")
+	private String lastPhraseId;
+
+	@Column(name="phrase_num", columnDefinition = "Integer(11) not null comment '短语数量'")
 	private Integer phraseNum;
 
-	@Column(name="dictation_id", columnDefinition = "Integer(11) not null comment '打卡开始默写ID'")
+	@Column(name="dictation_id", columnDefinition = "Integer(11) not null comment '开始默写ID'")
 	private Integer dictationId;
 
-	@Column(name="dictation_num", columnDefinition = "Integer(11) not null comment '打卡默写数量'")
+	@Column(name="dictation_num", columnDefinition = "Integer(11) not null comment '默写数量'")
 	private Integer dictationNum;
 
 	@Column(name="dictation_right_num", columnDefinition = "Integer(11) not null comment '打卡默写正确数量'")

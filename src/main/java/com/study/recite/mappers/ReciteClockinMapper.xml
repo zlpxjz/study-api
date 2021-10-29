@@ -54,7 +54,7 @@
         -->
         SELECT <include refid="Base_Column_List"/>
         FROM t_en_recite_clockin_info
-        WHERE STATUS = '1'
+        WHERE is_deleted = 'N'
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -64,7 +64,7 @@
         -->
         SELECT <include refid="Base_Column_List"/>
         FROM t_en_recite_clockin_info
-        WHERE STATUS = '1'
+        WHERE is_deleted = 'N'
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -72,7 +72,7 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_en_recite_clockin_info set STATUS = '0'
+        UPDATE t_en_recite_clockin_info set is_deleted = '1'
     </delete>
 
     <insert id="insert" parameterType="com.tool.study.models.ReciteClickinModel">
@@ -202,4 +202,17 @@
             is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
     </update>
+
+    <select id="selectByUserAndPlan" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_recite_clockin_info
+        WHERE is_deleted = '0'
+        and user_id = #{userId, jdbcType=VARCHAR}
+        and plan_id = #{planId, jdbcType=VARCHAR}
+        order by clockin_date asc
+    </select>
 </mapper>

@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * Created by Tony on 2021/10/29.
  */
-@Mapper(componentModel="spring")
+@Mapper
 public interface RecitePlanConvertor {
 	RecitePlanConvertor INSTANCE = Mappers.getMapper(RecitePlanConvertor.class);
 

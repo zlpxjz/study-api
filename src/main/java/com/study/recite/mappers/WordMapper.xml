@@ -36,7 +36,7 @@
         -->
         SELECT <include refid="Base_Column_List"/>
         FROM t_en_word_info
-        WHERE STATUS = '1'
+        WHERE is_deleted = 'N'
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -46,7 +46,7 @@
         -->
         SELECT <include refid="Base_Column_List"/>
         FROM t_en_word_info
-        WHERE STATUS = '1'
+        WHERE is_deleted = 'N'
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -54,7 +54,7 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_en_word_info set STATUS = '0'
+        UPDATE t_en_word_info set is_deleted = 'Y'
     </delete>
 
     <insert id="insert" parameterType="com.study.recite.models.WordModel">
@@ -130,4 +130,17 @@
             is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
     </update>
+
+    <select id="selectByBookAndFirstWordIdAndSize" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_word_info , t_en_book_word_info bookWord
+        WHERE is_deleted = 'N'
+        and bookWord.id = #{bookId, jdbcType=VARCHAR}
+        and t_en_word_info.id > #{wordId, jdbcType=VARCHAR}
+        limit #{size, jdbcType=INTEGER}
+    </select>
 </mapper>
