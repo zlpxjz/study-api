@@ -6,6 +6,7 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
+        <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="real_name" jdbcType="VARCHAR" property="realName" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
         <result column="email" jdbcType="VARCHAR" property="email" />
@@ -22,15 +23,16 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        t_user_info.real_name ,
-        t_user_info.phone ,
-        t_user_info.email ,
-        t_user_info.user_id ,
-        t_user_info.created_by ,
-        t_user_info.created_date ,
-        t_user_info.updated_by ,
-        t_user_info.updated_date ,
-        t_user_info.is_deleted 
+        user.real_name ,
+        user.phone ,
+        user.email ,
+        user.user_id ,
+        user.id ,
+        user.created_by ,
+        user.created_date ,
+        user.updated_by ,
+        user.updated_date ,
+        user.is_deleted 
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -38,9 +40,9 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_user_info
-        WHERE is_deleted = 'N'
+        select <include refid="Base_Column_List"/>
+        from t_user_info user
+        where is_deleted = 'N'
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -48,9 +50,10 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_user_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_user_info user
+        where is_deleted = 'N'
+        and id = #{id, jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -58,7 +61,8 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_user_info set is_deleted = 'Y'
+        update t_user_info set is_deleted = 'Y'
+                where id = #{id, jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.study.sys.models.UserModel">
@@ -66,28 +70,30 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        INSERT INTO  t_user_info
+        insert into  t_user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            real_name,
-            phone,
-            email,
-            user_id,
-            created_by,
-            created_date,
-            updated_by,
-            updated_date,
-            is_deleted,
+                real_name,
+                phone,
+                email,
+                user_id,
+                id,
+                created_by,
+                created_date,
+                updated_by,
+                updated_date,
+                is_deleted,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{realName, jdbcType=VARCHAR},
-            #{phone, jdbcType=VARCHAR},
-            #{email, jdbcType=VARCHAR},
-            #{userId, jdbcType=VARCHAR},
-            #{createdBy, jdbcType=VARCHAR},
-            #{createdDate, jdbcType=TIMESTAMP},
-            #{updatedBy, jdbcType=VARCHAR},
-            #{updatedDate, jdbcType=TIMESTAMP},
-            #{deleted, jdbcType=CHAR},
+                        #{realName, jdbcType=VARCHAR},
+                        #{phone, jdbcType=VARCHAR},
+                        #{email, jdbcType=VARCHAR},
+                        #{userId, jdbcType=VARCHAR},
+                        #{id, jdbcType=VARCHAR},
+                        #{createdBy, jdbcType=VARCHAR},
+                        #{createdDate, jdbcType=TIMESTAMP},
+                        #{updatedBy, jdbcType=VARCHAR},
+                        #{updatedDate, jdbcType=TIMESTAMP},
+                        #{deleted, jdbcType=CHAR},
         </trim>
     </insert>
 
@@ -96,36 +102,37 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_user_info set
+        update  t_user_info set
         <trim suffix=" " suffixOverrides=",">
-        <if test="_parameter.containsKey('realName')">
-        real_name = #{realName, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('phone')">
-        phone = #{phone, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('email')">
-        email = #{email, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('userId')">
-        user_id = #{userId, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdBy')">
-        created_by = #{createdBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdDate')">
-        created_date = #{createdDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('updatedBy')">
-        updated_by = #{updatedBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('updatedDate')">
-        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('deleted')">
-        is_deleted = #{deleted, jdbcType=CHAR},
-        </if>
+                    <if test="_parameter.containsKey('realName')">
+                    real_name = #{realName, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('phone')">
+                    phone = #{phone, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('email')">
+                    email = #{email, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('userId')">
+                    user_id = #{userId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdBy')">
+                    created_by = #{createdBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdDate')">
+                    created_date = #{createdDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('updatedBy')">
+                    updated_by = #{updatedBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('updatedDate')">
+                    updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('deleted')">
+                    is_deleted = #{deleted, jdbcType=CHAR},
+                    </if>
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.study.sys.models.UserModel">
@@ -133,17 +140,18 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_user_info set
+        update  t_user_info set
         <trim suffix=" " suffixOverrides=",">
-            real_name = #{realName, jdbcType=VARCHAR},
-            phone = #{phone, jdbcType=VARCHAR},
-            email = #{email, jdbcType=VARCHAR},
-            user_id = #{userId, jdbcType=VARCHAR},
-            created_by = #{createdBy, jdbcType=VARCHAR},
-            created_date = #{createdDate, jdbcType=TIMESTAMP},
-            updated_by = #{updatedBy, jdbcType=VARCHAR},
-            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-            is_deleted = #{deleted, jdbcType=CHAR},
+                real_name = #{realName, jdbcType=VARCHAR},
+                phone = #{phone, jdbcType=VARCHAR},
+                email = #{email, jdbcType=VARCHAR},
+                user_id = #{userId, jdbcType=VARCHAR},
+                created_by = #{createdBy, jdbcType=VARCHAR},
+                created_date = #{createdDate, jdbcType=TIMESTAMP},
+                updated_by = #{updatedBy, jdbcType=VARCHAR},
+                updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 </mapper>

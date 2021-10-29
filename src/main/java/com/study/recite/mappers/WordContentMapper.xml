@@ -6,7 +6,8 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        <result column="word_id" jdbcType="INTEGER" property="wordId" />
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="word_id" jdbcType="VARCHAR" property="wordId" />
         <result column="category" jdbcType="VARCHAR" property="category" />
         <result column="sub_category" jdbcType="VARCHAR" property="subCategory" />
         <result column="content_1" jdbcType="VARCHAR" property="content1" />
@@ -24,17 +25,18 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        t_en_word_content_info.word_id ,
-        t_en_word_content_info.category ,
-        t_en_word_content_info.sub_category ,
-        t_en_word_content_info.content_1 ,
-        t_en_word_content_info.content_2 ,
-        t_en_word_content_info.content_3 ,
-        t_en_word_content_info.created_by ,
-        t_en_word_content_info.created_date ,
-        t_en_word_content_info.updated_by ,
-        t_en_word_content_info.updated_date ,
-        t_en_word_content_info.is_deleted 
+        wordContent.word_id ,
+        wordContent.category ,
+        wordContent.sub_category ,
+        wordContent.content_1 ,
+        wordContent.content_2 ,
+        wordContent.content_3 ,
+        wordContent.id ,
+        wordContent.created_by ,
+        wordContent.created_date ,
+        wordContent.updated_by ,
+        wordContent.updated_date ,
+        wordContent.is_deleted 
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -42,27 +44,29 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_word_content_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_en_word_content_info wordContent
+        where is_deleted = 'N'
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_word_content_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_en_word_content_info wordContent
+        where is_deleted = 'N'
+        and id = #{id, jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_en_word_content_info set STATUS = '0'
+        update t_en_word_content_info set is_deleted = 'Y'
+                where id = #{id, jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.study.recite.models.WordContentModel">
@@ -70,32 +74,34 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        INSERT INTO  t_en_word_content_info
+        insert into  t_en_word_content_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            word_id,
-            category,
-            sub_category,
-            content_1,
-            content_2,
-            content_3,
-            created_by,
-            created_date,
-            updated_by,
-            updated_date,
-            is_deleted,
+                word_id,
+                category,
+                sub_category,
+                content_1,
+                content_2,
+                content_3,
+                id,
+                created_by,
+                created_date,
+                updated_by,
+                updated_date,
+                is_deleted,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{wordId, jdbcType=INTEGER},
-            #{category, jdbcType=VARCHAR},
-            #{subCategory, jdbcType=VARCHAR},
-            #{content1, jdbcType=VARCHAR},
-            #{content2, jdbcType=VARCHAR},
-            #{content3, jdbcType=VARCHAR},
-            #{createdBy, jdbcType=VARCHAR},
-            #{createdDate, jdbcType=TIMESTAMP},
-            #{updatedBy, jdbcType=VARCHAR},
-            #{updatedDate, jdbcType=TIMESTAMP},
-            #{deleted, jdbcType=CHAR},
+                        #{wordId, jdbcType=VARCHAR},
+                        #{category, jdbcType=VARCHAR},
+                        #{subCategory, jdbcType=VARCHAR},
+                        #{content1, jdbcType=VARCHAR},
+                        #{content2, jdbcType=VARCHAR},
+                        #{content3, jdbcType=VARCHAR},
+                        #{id, jdbcType=VARCHAR},
+                        #{createdBy, jdbcType=VARCHAR},
+                        #{createdDate, jdbcType=TIMESTAMP},
+                        #{updatedBy, jdbcType=VARCHAR},
+                        #{updatedDate, jdbcType=TIMESTAMP},
+                        #{deleted, jdbcType=CHAR},
         </trim>
     </insert>
 
@@ -104,42 +110,43 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_word_content_info set
+        update  t_en_word_content_info set
         <trim suffix=" " suffixOverrides=",">
-        <if test="_parameter.containsKey('wordId')">
-        word_id = #{wordId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('category')">
-        category = #{category, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('subCategory')">
-        sub_category = #{subCategory, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('content1')">
-        content_1 = #{content1, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('content2')">
-        content_2 = #{content2, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('content3')">
-        content_3 = #{content3, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdBy')">
-        created_by = #{createdBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdDate')">
-        created_date = #{createdDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('updatedBy')">
-        updated_by = #{updatedBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('updatedDate')">
-        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('deleted')">
-        is_deleted = #{deleted, jdbcType=CHAR},
-        </if>
+                    <if test="_parameter.containsKey('wordId')">
+                    word_id = #{wordId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('category')">
+                    category = #{category, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('subCategory')">
+                    sub_category = #{subCategory, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('content1')">
+                    content_1 = #{content1, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('content2')">
+                    content_2 = #{content2, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('content3')">
+                    content_3 = #{content3, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdBy')">
+                    created_by = #{createdBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdDate')">
+                    created_date = #{createdDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('updatedBy')">
+                    updated_by = #{updatedBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('updatedDate')">
+                    updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('deleted')">
+                    is_deleted = #{deleted, jdbcType=CHAR},
+                    </if>
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.study.recite.models.WordContentModel">
@@ -147,19 +154,31 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_word_content_info set
+        update  t_en_word_content_info set
         <trim suffix=" " suffixOverrides=",">
-            word_id = #{wordId, jdbcType=INTEGER},
-            category = #{category, jdbcType=VARCHAR},
-            sub_category = #{subCategory, jdbcType=VARCHAR},
-            content_1 = #{content1, jdbcType=VARCHAR},
-            content_2 = #{content2, jdbcType=VARCHAR},
-            content_3 = #{content3, jdbcType=VARCHAR},
-            created_by = #{createdBy, jdbcType=VARCHAR},
-            created_date = #{createdDate, jdbcType=TIMESTAMP},
-            updated_by = #{updatedBy, jdbcType=VARCHAR},
-            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-            is_deleted = #{deleted, jdbcType=CHAR},
+                word_id = #{wordId, jdbcType=VARCHAR},
+                category = #{category, jdbcType=VARCHAR},
+                sub_category = #{subCategory, jdbcType=VARCHAR},
+                content_1 = #{content1, jdbcType=VARCHAR},
+                content_2 = #{content2, jdbcType=VARCHAR},
+                content_3 = #{content3, jdbcType=VARCHAR},
+                created_by = #{createdBy, jdbcType=VARCHAR},
+                created_date = #{createdDate, jdbcType=TIMESTAMP},
+                updated_by = #{updatedBy, jdbcType=VARCHAR},
+                updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
+
+    <select id="selectByWord"  resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_word_content_info
+        WHERE is_deleted = 'N'
+        and word_id = #{wordId, jdbcType=VARCHAR}
+    </select>
 </mapper>

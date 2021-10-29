@@ -2,6 +2,7 @@ package com.study.recite.models;
 
 import com.fasterapp.base.arch.model.BaseModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "ReciteClickin")
 @Table(name= "t_en_recite_clockin_info")
 public class ReciteClockinModel extends BaseModel<String> {

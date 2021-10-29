@@ -2,6 +2,7 @@ package com.study.sys.models;
 
 import com.fasterapp.base.arch.model.BaseModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
  * Created by Tony on 2021/10/28.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "User")
 @Table(name= "t_user_info")
 public class UserModel extends BaseModel<String> {

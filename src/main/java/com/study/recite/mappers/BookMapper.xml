@@ -6,7 +6,8 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
         <result column="phase" jdbcType="VARCHAR" property="phase" />
         <result column="grade" jdbcType="VARCHAR" property="grade" />
         <result column="course" jdbcType="VARCHAR" property="course" />
@@ -25,18 +26,19 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        t_book_info.parent_id ,
-        t_book_info.phase ,
-        t_book_info.grade ,
-        t_book_info.course ,
-        t_book_info.category ,
-        t_book_info.name ,
-        t_book_info.cover_pic ,
-        t_book_info.created_by ,
-        t_book_info.created_date ,
-        t_book_info.updated_by ,
-        t_book_info.updated_date ,
-        t_book_info.is_deleted 
+        book.parent_id ,
+        book.phase ,
+        book.grade ,
+        book.course ,
+        book.category ,
+        book.name ,
+        book.cover_pic ,
+        book.id ,
+        book.created_by ,
+        book.created_date ,
+        book.updated_by ,
+        book.updated_date ,
+        book.is_deleted 
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -44,27 +46,29 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_book_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_book_info book
+        where is_deleted = 'N'
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_book_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_book_info book
+        where is_deleted = 'N'
+        and id = #{id, jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_book_info set STATUS = '1'
+        update t_book_info set is_deleted = 'Y'
+                where id = #{id, jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.study.recite.models.BookModel">
@@ -72,34 +76,36 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        INSERT INTO  t_book_info
+        insert into  t_book_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            parent_id,
-            phase,
-            grade,
-            course,
-            category,
-            name,
-            cover_pic,
-            created_by,
-            created_date,
-            updated_by,
-            updated_date,
-            is_deleted,
+                parent_id,
+                phase,
+                grade,
+                course,
+                category,
+                name,
+                cover_pic,
+                id,
+                created_by,
+                created_date,
+                updated_by,
+                updated_date,
+                is_deleted,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{parentId, jdbcType=INTEGER},
-            #{phase, jdbcType=VARCHAR},
-            #{grade, jdbcType=VARCHAR},
-            #{course, jdbcType=VARCHAR},
-            #{category, jdbcType=VARCHAR},
-            #{name, jdbcType=VARCHAR},
-            #{coverPic, jdbcType=VARCHAR},
-            #{createdBy, jdbcType=VARCHAR},
-            #{createdDate, jdbcType=TIMESTAMP},
-            #{updatedBy, jdbcType=VARCHAR},
-            #{updatedDate, jdbcType=TIMESTAMP},
-            #{deleted, jdbcType=CHAR},
+                        #{parentId, jdbcType=VARCHAR},
+                        #{phase, jdbcType=VARCHAR},
+                        #{grade, jdbcType=VARCHAR},
+                        #{course, jdbcType=VARCHAR},
+                        #{category, jdbcType=VARCHAR},
+                        #{name, jdbcType=VARCHAR},
+                        #{coverPic, jdbcType=VARCHAR},
+                        #{id, jdbcType=VARCHAR},
+                        #{createdBy, jdbcType=VARCHAR},
+                        #{createdDate, jdbcType=TIMESTAMP},
+                        #{updatedBy, jdbcType=VARCHAR},
+                        #{updatedDate, jdbcType=TIMESTAMP},
+                        #{deleted, jdbcType=CHAR},
         </trim>
     </insert>
 
@@ -108,45 +114,46 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_book_info set
+        update  t_book_info set
         <trim suffix=" " suffixOverrides=",">
-        <if test="_parameter.containsKey('parentId')">
-        parent_id = #{parentId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('phase')">
-        phase = #{phase, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('grade')">
-        grade = #{grade, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('course')">
-        course = #{course, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('category')">
-        category = #{category, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('name')">
-        name = #{name, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('coverPic')">
-        cover_pic = #{coverPic, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdBy')">
-        created_by = #{createdBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdDate')">
-        created_date = #{createdDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('updatedBy')">
-        updated_by = #{updatedBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('updatedDate')">
-        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('deleted')">
-        is_deleted = #{deleted, jdbcType=CHAR},
-        </if>
+                    <if test="_parameter.containsKey('parentId')">
+                    parent_id = #{parentId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('phase')">
+                    phase = #{phase, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('grade')">
+                    grade = #{grade, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('course')">
+                    course = #{course, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('category')">
+                    category = #{category, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('name')">
+                    name = #{name, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('coverPic')">
+                    cover_pic = #{coverPic, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdBy')">
+                    created_by = #{createdBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdDate')">
+                    created_date = #{createdDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('updatedBy')">
+                    updated_by = #{updatedBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('updatedDate')">
+                    updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('deleted')">
+                    is_deleted = #{deleted, jdbcType=CHAR},
+                    </if>
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.study.recite.models.BookModel">
@@ -154,21 +161,22 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_book_info set
+        update  t_book_info set
         <trim suffix=" " suffixOverrides=",">
-            parent_id = #{parentId, jdbcType=INTEGER},
-            phase = #{phase, jdbcType=VARCHAR},
-            grade = #{grade, jdbcType=VARCHAR},
-            course = #{course, jdbcType=VARCHAR},
-            category = #{category, jdbcType=VARCHAR},
-            name = #{name, jdbcType=VARCHAR},
-            cover_pic = #{coverPic, jdbcType=VARCHAR},
-            created_by = #{createdBy, jdbcType=VARCHAR},
-            created_date = #{createdDate, jdbcType=TIMESTAMP},
-            updated_by = #{updatedBy, jdbcType=VARCHAR},
-            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-            is_deleted = #{deleted, jdbcType=CHAR},
+                parent_id = #{parentId, jdbcType=VARCHAR},
+                phase = #{phase, jdbcType=VARCHAR},
+                grade = #{grade, jdbcType=VARCHAR},
+                course = #{course, jdbcType=VARCHAR},
+                category = #{category, jdbcType=VARCHAR},
+                name = #{name, jdbcType=VARCHAR},
+                cover_pic = #{coverPic, jdbcType=VARCHAR},
+                created_by = #{createdBy, jdbcType=VARCHAR},
+                created_date = #{createdDate, jdbcType=TIMESTAMP},
+                updated_by = #{updatedBy, jdbcType=VARCHAR},
+                updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <select id="selectByGetBookRequest" resultMap="BaseResultMap">
@@ -178,7 +186,7 @@
         -->
         SELECT <include refid="Base_Column_List"/>
         FROM t_book_info
-        WHERE is_deleted = '0'
+        WHERE is_deleted = 'N'
 
         <if test="phase != null and phase != '' " >
             and phase = #{phase, jdbcType=VARCHAR}
