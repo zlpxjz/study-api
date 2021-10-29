@@ -2,6 +2,7 @@ package com.study.recite.apis;
 
 import com.fasterapp.base.arch.ApiResponse;
 import com.fasterapp.base.arch.api.BaseApi;
+import com.study.common.SessionContext;
 import com.study.recite.dtos.RecitePlanDto;
 import com.study.recite.services.IRecitePlanService;
 import io.swagger.annotations.Api;
@@ -28,7 +29,8 @@ public class RecitePlanApi extends BaseApi {
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
     @GetMapping
     public ApiResponse get() throws Exception{
-        RecitePlanDto planDto = recitePlanService.get();
+        String userId = SessionContext.getUserId();
+        RecitePlanDto planDto = recitePlanService.get(userId);
         return ApiResponse.success(planDto);
     }
 

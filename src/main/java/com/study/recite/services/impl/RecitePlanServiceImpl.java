@@ -2,6 +2,7 @@ package com.study.recite.services.impl;
 
 import com.study.common.BaseServiceImpl;
 import com.study.recite.dtos.RecitePlanDto;
+import com.study.recite.dtos.convertors.RecitePlanConvertor;
 import com.study.recite.mappers.RecitePlanMapper;
 import com.study.recite.models.BookModel;
 import com.study.recite.models.RecitePlanModel;
@@ -52,8 +53,6 @@ public class RecitePlanServiceImpl extends BaseServiceImpl<String, RecitePlanMod
 
 		BookModel bookModel = bookService.getOne(planModel.getBookId());
 
-
-
-		return null;
+		return RecitePlanConvertor.INSTANCE.convert(planModel, bookModel);
 	}
 }
