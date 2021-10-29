@@ -1,14 +1,18 @@
 package com.study.recite.dtos;
 
-import com.study.recite.models.BookModel;
+import lombok.Data;
 
 /**
  * Created by Tony on 2021/10/27.
  */
+@Data
 public class BookDto {
-	public static BookDto build(BookModel model){
-		BookDto response = new BookDto();
-
-		return response;
-	}
+	private String id;
+	private String parentId;
+	private String phase;
+	private String grade;
+	private String course;
+	private String category;
+	private String name;
+	private String coverPic;
 }

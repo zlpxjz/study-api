@@ -2,6 +2,7 @@ package com.study.recite.models;
 
 import com.fasterapp.base.arch.model.BaseModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "RecitePlan")
 @Table(name= "t_en_recite_plan_info")
 public class RecitePlanModel extends BaseModel<String> {
@@ -45,6 +47,9 @@ public class RecitePlanModel extends BaseModel<String> {
 
 	@Column(name="repeat_times", columnDefinition = "Integer(11) not null comment '重复次数'")
 	private Integer repeatTimes;
+
+	@Column(name="clockin_id", columnDefinition = "varchar(32) not null comment '最新打卡记录")
+	private String clockinId;
 
 	@Column(name="clockin_times", columnDefinition = "Integer(11) not null comment '打卡次数")
 	private Integer clockinTimes;

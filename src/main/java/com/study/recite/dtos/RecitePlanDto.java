@@ -1,7 +1,5 @@
 package com.study.recite.dtos;
 
-import com.study.recite.models.BookModel;
-import com.study.recite.models.RecitePlanModel;
 import lombok.Data;
 
 /**

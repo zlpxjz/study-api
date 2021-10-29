@@ -17,4 +17,10 @@ public interface IRecitePlanService extends IBaseService<String, RecitePlanModel
 	 * @throws Exception
 	 */
 	RecitePlanDto get(String userId) throws Exception;
+
+	/**
+	 *
+	 * @throws Exception
+	 */
+	RecitePlanModel getModel(String userId) throws Exception;
 }

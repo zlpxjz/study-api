@@ -2,6 +2,7 @@ package com.study.recite.models;
 
 import com.fasterapp.base.arch.model.BaseModel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity(name = "Book")
 @Table(name= "t_book_info")
 public class BookModel extends BaseModel<String> {

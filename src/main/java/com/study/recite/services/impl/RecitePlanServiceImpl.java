@@ -42,6 +42,14 @@ public class RecitePlanServiceImpl extends BaseServiceImpl<String, RecitePlanMod
 	}
 
 	@Override
+	public RecitePlanModel getModel(String userId) throws Exception {
+		Map params = new HashMap<>();
+		params.put("userId", userId);
+		params.put("status", RecitePlanModel.RECITE_STATUS.进行中.name());
+		return this.mapper.selectByMap(params);
+	}
+
+	@Override
 	public RecitePlanDto get(String userId) throws Exception {
 		Map params = new HashMap<>();
 		params.put("userId", userId);
@@ -54,6 +62,5 @@ public class RecitePlanServiceImpl extends BaseServiceImpl<String, RecitePlanMod
 		BookModel bookModel = bookService.getOne(planModel.getBookId());
 
 		return RecitePlanConvertor.INSTANCE.convert(planModel, bookModel);
-
 	}
 }

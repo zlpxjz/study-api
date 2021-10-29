@@ -22,13 +22,6 @@ public class BookApi extends BaseApi {
     @Autowired
     private IBookService bookService;
 
-    @ApiOperation(value = "保存数据", notes = "保存数据")
-    @PostMapping
-    public ApiResponse save(@RequestBody BookModel model) throws Exception{
-        bookService.save(model);
-        return ApiResponse.success().setMessage("保存成功�?");
-    }
-
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
     @GetMapping(path="/{id}")
     public ApiResponse get(@PathVariable("id") String Id) throws Exception{
@@ -41,12 +34,5 @@ public class BookApi extends BaseApi {
     public ApiResponse get(@RequestBody GetBookDto request) throws Exception{
         List<BookDto> response = bookService.get(request);
         return ApiResponse.success(response);
-    }
-
-    @ApiOperation(value = "删除指定数据", notes = "删除指定数据")
-    @GetMapping(path="/{id}")
-    public ApiResponse delete(@PathVariable("id") String id) throws Exception{
-        bookService.delete(id);
-        return ApiResponse.success().setMessage("删除成功�?");
     }
 }

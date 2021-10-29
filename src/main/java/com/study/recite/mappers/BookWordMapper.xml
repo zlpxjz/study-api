@@ -6,8 +6,9 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        <result column="book_id" jdbcType="INTEGER" property="bookId" />
-        <result column="word_id" jdbcType="INTEGER" property="wordId" />
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+        <result column="word_id" jdbcType="VARCHAR" property="wordId" />
         <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
         <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
@@ -20,13 +21,14 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        t_en_book_word_info.book_id ,
-        t_en_book_word_info.word_id ,
-        t_en_book_word_info.created_by ,
-        t_en_book_word_info.created_date ,
-        t_en_book_word_info.updated_by ,
-        t_en_book_word_info.updated_date ,
-        t_en_book_word_info.is_deleted 
+        bookWord.book_id ,
+        bookWord.word_id ,
+        bookWord.id ,
+        bookWord.created_by ,
+        bookWord.created_date ,
+        bookWord.updated_by ,
+        bookWord.updated_date ,
+        bookWord.is_deleted 
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -34,9 +36,9 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_book_word_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_en_book_word_info bookWord
+        where is_deleted = 'N'
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -44,9 +46,10 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_book_word_info
-        WHERE STATUS = '1'
+        select <include refid="Base_Column_List"/>
+        from t_en_book_word_info bookWord
+        where is_deleted = 'N'
+        and id = #{id, jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -54,7 +57,8 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_en_book_word_info set STATUS = '0'
+        update t_en_book_word_info set is_deleted = 'Y'
+                where id = #{id, jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.study.recite.models.BookWordModel">
@@ -62,24 +66,26 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        INSERT INTO  t_en_book_word_info
+        insert into  t_en_book_word_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            book_id,
-            word_id,
-            created_by,
-            created_date,
-            updated_by,
-            updated_date,
-            is_deleted,
+                book_id,
+                word_id,
+                id,
+                created_by,
+                created_date,
+                updated_by,
+                updated_date,
+                is_deleted,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{bookId, jdbcType=INTEGER},
-            #{wordId, jdbcType=INTEGER},
-            #{createdBy, jdbcType=VARCHAR},
-            #{createdDate, jdbcType=TIMESTAMP},
-            #{updatedBy, jdbcType=VARCHAR},
-            #{updatedDate, jdbcType=TIMESTAMP},
-            #{deleted, jdbcType=CHAR},
+                        #{bookId, jdbcType=VARCHAR},
+                        #{wordId, jdbcType=VARCHAR},
+                        #{id, jdbcType=VARCHAR},
+                        #{createdBy, jdbcType=VARCHAR},
+                        #{createdDate, jdbcType=TIMESTAMP},
+                        #{updatedBy, jdbcType=VARCHAR},
+                        #{updatedDate, jdbcType=TIMESTAMP},
+                        #{deleted, jdbcType=CHAR},
         </trim>
     </insert>
 
@@ -88,30 +94,31 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_book_word_info set
+        update  t_en_book_word_info set
         <trim suffix=" " suffixOverrides=",">
-        <if test="_parameter.containsKey('bookId')">
-        book_id = #{bookId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('wordId')">
-        word_id = #{wordId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('createdBy')">
-        created_by = #{createdBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdDate')">
-        created_date = #{createdDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('updatedBy')">
-        updated_by = #{updatedBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('updatedDate')">
-        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('deleted')">
-        is_deleted = #{deleted, jdbcType=CHAR},
-        </if>
+                    <if test="_parameter.containsKey('bookId')">
+                    book_id = #{bookId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('wordId')">
+                    word_id = #{wordId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdBy')">
+                    created_by = #{createdBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdDate')">
+                    created_date = #{createdDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('updatedBy')">
+                    updated_by = #{updatedBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('updatedDate')">
+                    updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('deleted')">
+                    is_deleted = #{deleted, jdbcType=CHAR},
+                    </if>
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.study.recite.models.BookWordModel">
@@ -119,15 +126,16 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_book_word_info set
+        update  t_en_book_word_info set
         <trim suffix=" " suffixOverrides=",">
-            book_id = #{bookId, jdbcType=INTEGER},
-            word_id = #{wordId, jdbcType=INTEGER},
-            created_by = #{createdBy, jdbcType=VARCHAR},
-            created_date = #{createdDate, jdbcType=TIMESTAMP},
-            updated_by = #{updatedBy, jdbcType=VARCHAR},
-            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-            is_deleted = #{deleted, jdbcType=CHAR},
+                book_id = #{bookId, jdbcType=VARCHAR},
+                word_id = #{wordId, jdbcType=VARCHAR},
+                created_by = #{createdBy, jdbcType=VARCHAR},
+                created_date = #{createdDate, jdbcType=TIMESTAMP},
+                updated_by = #{updatedBy, jdbcType=VARCHAR},
+                updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 </mapper>
