@@ -1,0 +1,96 @@
+spring:
+  datasource:
+    ds1: #采购数据库
+      #type: com.alibaba.druid.pool.DruidDataSource 采用DRUID的startup方式
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.150.9.98:3306/uc_purchase?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: live@Iri$234
+
+    ds2: #新车销售
+      #type: com.alibaba.druid.pool.DruidDataSource 采用DRUID的startup方式
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.150.9.11:3306/uc_purchase?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+      username: lsh_live
+      password: live@Iri$234
+
+    ds3: #360
+      #type: com.alibaba.druid.pool.DruidDataSource 采用DRUID的startup方式
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.150.24.68:3306/ecepdb?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+      username: readuser
+      password: read.IRIS.com
+
+    ivts: #ivts
+      #type: com.alibaba.druid.pool.DruidDataSource 采用DRUID的startup方式
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://10.150.24.88:3306/ivtsdb?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+      username: jiangwei
+      password: ArXtdNNO1gwRmpj3Oc
+      connection-timeout: 60000
+
+
+  #时间戳统一转换
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+logging:
+  config: classpath:log4j2.xml
+
+server:
+    port: 8990
+    servlet:
+      context-path: /api/fronter/purchase/
+
+#springfox.documentation.swagger.v2.path: /api-docs
+api:
+  headers: live-license,live-username
+  file:
+    download:
+      server: /data/upload/
+    upload:
+      path:   /data/upload/
+
+#外部系统连接配置
+endpoint:
+  msc:
+    mscUrl: http://10.150.9.96:8080/liveWebService/web
+  dbm:
+    username: liveuc2pop
+    password: LiveUCtopop1
+    checkUrl: http://10.150.18.88:8080/RESTAdapter/UCI012/VehicleCheckIn
+  approval:
+    submitUrl: http://10.150.31.4:8888/DataInterface/LIVE/LiveService.asmx
+    cancelUrl: http://10.150.31.4:8888/api/WorkFlowOperate/RetractProcessByFolio
+    statusUrl: http://10.150.31.4:8888/api/FormData/GetModelDataByFolio
+    uploadUrl: http://10.150.31.4:8888/api/HrProcessData/UploadFile
+  auction:
+      url:  http://localhost:8080/auction
+  che300:
+      url:  http://api.che300.com
+      token:  c144324e6d2a0d0afa417ad042bedccc
+  pic:
+      url: http://uclive.lshauto.com.cn:2828/imgs/
+  purchase:
+      url: http://localhost:8176/api/purchase
+  autostreet:
+    publish: https://eqs2.autostreets.com/api/uclive/pushCarInfo
+    api: com.autostreets.auction.dealer.api.AuctionPushCarInfoService#pushCarInfo
+    appKey: BB0E4A31185A8E9634282384FBA67191
+    appSecret:  92AF05E286220AD03239D8697D70F10A2704E73642D349A4A126365DF5095824
+  ivts:
+    url: http://localhost:8176/api/purchase
+  OAB:
+    url: https://api-cn-aws.daimler.com/online-booking-cn/oab/oneapi/
+    x-api-key: bc480355-fb6c-4196-aa73-e4a1b6636ec0
+    user_name: LSH
+    password: 1234abcd
+    channel: LSH
+    job_group: 1
+    job_id: 1
+
+#本品
+parameters:
+  brand:
+    self: AMG,MB,MM,smart,DENZA,VAN
