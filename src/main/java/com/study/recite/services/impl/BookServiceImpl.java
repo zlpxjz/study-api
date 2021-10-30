@@ -1,6 +1,6 @@
 package com.study.recite.services.impl;
 
-import com.fasterapp.base.arch.service.BaseServiceImpl;
+import com.study.common.BaseServiceImpl;
 import com.study.recite.dtos.BookDto;
 import com.study.recite.dtos.GetBookDto;
 import com.study.recite.dtos.convertors.BookConvertor;

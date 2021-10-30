@@ -1,6 +1,6 @@
 package com.study.recite.services.impl;
 
-import com.fasterapp.base.arch.service.BaseServiceImpl;
+import com.study.common.BaseServiceImpl;
 import com.study.recite.mappers.ReciteClockinMapper;
 import com.study.recite.models.ReciteClockinModel;
 import com.study.recite.services.IReciteClockinService;

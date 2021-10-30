@@ -6,11 +6,15 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        <result column="user_id" jdbcType="INTEGER" property="userId" />
-        <result column="book_id" jdbcType="INTEGER" property="bookId" />
-        <result column="word_id" jdbcType="INTEGER" property="wordId" />
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="plan_id" jdbcType="VARCHAR" property="planId" />
+        <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+        <result column="first_word_id" jdbcType="VARCHAR" property="firstWordId" />
+        <result column="last_word_id" jdbcType="VARCHAR" property="lastWordId" />
         <result column="word_num" jdbcType="INTEGER" property="wordNum" />
-        <result column="phrase_id" jdbcType="INTEGER" property="phraseId" />
+        <result column="first_phrase_id" jdbcType="INTEGER" property="firstPhraseId" />
+        <result column="last_phrase_id" jdbcType="INTEGER" property="lastPhraseId" />
         <result column="phrase_num" jdbcType="INTEGER" property="phraseNum" />
         <result column="dictation_id" jdbcType="INTEGER" property="dictationId" />
         <result column="dictation_num" jdbcType="INTEGER" property="dictationNum" />
@@ -29,22 +33,26 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        t_en_recite_clockin_info.user_id ,
-        t_en_recite_clockin_info.book_id ,
-        t_en_recite_clockin_info.word_id ,
-        t_en_recite_clockin_info.word_num ,
-        t_en_recite_clockin_info.phrase_id ,
-        t_en_recite_clockin_info.phrase_num ,
-        t_en_recite_clockin_info.dictation_id ,
-        t_en_recite_clockin_info.dictation_num ,
-        t_en_recite_clockin_info.dictation_right_num ,
-        t_en_recite_clockin_info.dictation_wrong_num ,
-        t_en_recite_clockin_info.clockin_date ,
-        t_en_recite_clockin_info.created_by ,
-        t_en_recite_clockin_info.created_date ,
-        t_en_recite_clockin_info.updated_by ,
-        t_en_recite_clockin_info.updated_date ,
-        t_en_recite_clockin_info.is_deleted 
+        reciteClockin.user_id ,
+        reciteClockin.plan_id ,
+        reciteClockin.book_id ,
+        reciteClockin.first_word_id ,
+        reciteClockin.last_word_id ,
+        reciteClockin.word_num ,
+        reciteClockin.first_phrase_id ,
+        reciteClockin.last_phrase_id ,
+        reciteClockin.phrase_num ,
+        reciteClockin.dictation_id ,
+        reciteClockin.dictation_num ,
+        reciteClockin.dictation_right_num ,
+        reciteClockin.dictation_wrong_num ,
+        reciteClockin.clockin_date ,
+        reciteClockin.id ,
+        reciteClockin.created_by ,
+        reciteClockin.created_date ,
+        reciteClockin.updated_by ,
+        reciteClockin.updated_date ,
+        reciteClockin.is_deleted 
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -52,9 +60,9 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_recite_clockin_info
-        WHERE is_deleted = 'N'
+        select <include refid="Base_Column_List"/>
+        from t_en_recite_clockin_info reciteClockin
+        where is_deleted = 'N'
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -62,9 +70,10 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        SELECT <include refid="Base_Column_List"/>
-        FROM t_en_recite_clockin_info
-        WHERE is_deleted = 'N'
+        select <include refid="Base_Column_List"/>
+        from t_en_recite_clockin_info reciteClockin
+        where is_deleted = 'N'
+        and id = #{id, jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -72,7 +81,8 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE t_en_recite_clockin_info set is_deleted = '1'
+        update t_en_recite_clockin_info set is_deleted = 'Y'
+                where id = #{id, jdbcType=VARCHAR}
     </delete>
 
     <insert id="insert" parameterType="com.tool.study.models.ReciteClickinModel">
@@ -80,42 +90,50 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        INSERT INTO  t_en_recite_clockin_info
+        insert into  t_en_recite_clockin_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            user_id,
-            book_id,
-            word_id,
-            word_num,
-            phrase_id,
-            phrase_num,
-            dictation_id,
-            dictation_num,
-            dictation_right_num,
-            dictation_wrong_num,
-            clockin_date,
-            created_by,
-            created_date,
-            updated_by,
-            updated_date,
-            is_deleted,
+                user_id,
+                plan_id,
+                book_id,
+                first_word_id,
+                last_word_id,
+                word_num,
+                first_phrase_id,
+                last_phrase_id,
+                phrase_num,
+                dictation_id,
+                dictation_num,
+                dictation_right_num,
+                dictation_wrong_num,
+                clockin_date,
+                id,
+                created_by,
+                created_date,
+                updated_by,
+                updated_date,
+                is_deleted,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            #{userId, jdbcType=INTEGER},
-            #{bookId, jdbcType=INTEGER},
-            #{wordId, jdbcType=INTEGER},
-            #{wordNum, jdbcType=INTEGER},
-            #{phraseId, jdbcType=INTEGER},
-            #{phraseNum, jdbcType=INTEGER},
-            #{dictationId, jdbcType=INTEGER},
-            #{dictationNum, jdbcType=INTEGER},
-            #{dictationRightNum, jdbcType=INTEGER},
-            #{dictationWrongNum, jdbcType=INTEGER},
-            #{clockinDate, jdbcType=TIMESTAMP},
-            #{createdBy, jdbcType=VARCHAR},
-            #{createdDate, jdbcType=TIMESTAMP},
-            #{updatedBy, jdbcType=VARCHAR},
-            #{updatedDate, jdbcType=TIMESTAMP},
-            #{deleted, jdbcType=CHAR},
+                        #{userId, jdbcType=VARCHAR},
+                        #{planId, jdbcType=VARCHAR},
+                        #{bookId, jdbcType=VARCHAR},
+                        #{firstWordId, jdbcType=VARCHAR},
+                        #{lastWordId, jdbcType=VARCHAR},
+                        #{wordNum, jdbcType=INTEGER},
+                        #{firstPhraseId, jdbcType=INTEGER},
+                        #{lastPhraseId, jdbcType=INTEGER},
+                        #{phraseNum, jdbcType=INTEGER},
+                        #{dictationId, jdbcType=INTEGER},
+                        #{dictationNum, jdbcType=INTEGER},
+                        #{dictationRightNum, jdbcType=INTEGER},
+                        #{dictationWrongNum, jdbcType=INTEGER},
+                        #{clockinDate, jdbcType=TIMESTAMP},
+                        #{id, jdbcType=VARCHAR},
+                        #{createdBy, jdbcType=VARCHAR},
+                        #{createdDate, jdbcType=TIMESTAMP},
+                        #{updatedBy, jdbcType=VARCHAR},
+                        #{updatedDate, jdbcType=TIMESTAMP},
+                        #{deleted, jdbcType=CHAR},
         </trim>
     </insert>
 
@@ -124,57 +142,67 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_recite_clockin_info set
+        update  t_en_recite_clockin_info set
         <trim suffix=" " suffixOverrides=",">
-        <if test="_parameter.containsKey('userId')">
-        user_id = #{userId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('bookId')">
-        book_id = #{bookId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('wordId')">
-        word_id = #{wordId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('wordNum')">
-        word_num = #{wordNum, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('phraseId')">
-        phrase_id = #{phraseId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('phraseNum')">
-        phrase_num = #{phraseNum, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('dictationId')">
-        dictation_id = #{dictationId, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('dictationNum')">
-        dictation_num = #{dictationNum, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('dictationRightNum')">
-        dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('dictationWrongNum')">
-        dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
-        </if>
-        <if test="_parameter.containsKey('clockinDate')">
-        clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('createdBy')">
-        created_by = #{createdBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('createdDate')">
-        created_date = #{createdDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('updatedBy')">
-        updated_by = #{updatedBy, jdbcType=VARCHAR},
-        </if>
-        <if test="_parameter.containsKey('updatedDate')">
-        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-        </if>
-        <if test="_parameter.containsKey('deleted')">
-        is_deleted = #{deleted, jdbcType=CHAR},
-        </if>
+                    <if test="_parameter.containsKey('userId')">
+                    user_id = #{userId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('planId')">
+                    plan_id = #{planId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('bookId')">
+                    book_id = #{bookId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('firstWordId')">
+                    first_word_id = #{firstWordId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('lastWordId')">
+                    last_word_id = #{lastWordId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('wordNum')">
+                    word_num = #{wordNum, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('firstPhraseId')">
+                    first_phrase_id = #{firstPhraseId, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('lastPhraseId')">
+                    last_phrase_id = #{lastPhraseId, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('phraseNum')">
+                    phrase_num = #{phraseNum, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('dictationId')">
+                    dictation_id = #{dictationId, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('dictationNum')">
+                    dictation_num = #{dictationNum, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('dictationRightNum')">
+                    dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('dictationWrongNum')">
+                    dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
+                    </if>
+                    <if test="_parameter.containsKey('clockinDate')">
+                    clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('createdBy')">
+                    created_by = #{createdBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('createdDate')">
+                    created_date = #{createdDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('updatedBy')">
+                    updated_by = #{updatedBy, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('updatedDate')">
+                    updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                    </if>
+                    <if test="_parameter.containsKey('deleted')">
+                    is_deleted = #{deleted, jdbcType=CHAR},
+                    </if>
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.tool.study.models.ReciteClickinModel">
@@ -182,25 +210,29 @@
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
         -->
-        UPDATE  t_en_recite_clockin_info set
+        update  t_en_recite_clockin_info set
         <trim suffix=" " suffixOverrides=",">
-            user_id = #{userId, jdbcType=INTEGER},
-            book_id = #{bookId, jdbcType=INTEGER},
-            word_id = #{wordId, jdbcType=INTEGER},
-            word_num = #{wordNum, jdbcType=INTEGER},
-            phrase_id = #{phraseId, jdbcType=INTEGER},
-            phrase_num = #{phraseNum, jdbcType=INTEGER},
-            dictation_id = #{dictationId, jdbcType=INTEGER},
-            dictation_num = #{dictationNum, jdbcType=INTEGER},
-            dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
-            dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
-            clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
-            created_by = #{createdBy, jdbcType=VARCHAR},
-            created_date = #{createdDate, jdbcType=TIMESTAMP},
-            updated_by = #{updatedBy, jdbcType=VARCHAR},
-            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
-            is_deleted = #{deleted, jdbcType=CHAR},
+                user_id = #{userId, jdbcType=VARCHAR},
+                plan_id = #{planId, jdbcType=VARCHAR},
+                book_id = #{bookId, jdbcType=VARCHAR},
+                first_word_id = #{firstWordId, jdbcType=VARCHAR},
+                last_word_id = #{lastWordId, jdbcType=VARCHAR},
+                word_num = #{wordNum, jdbcType=INTEGER},
+                first_phrase_id = #{firstPhraseId, jdbcType=INTEGER},
+                last_phrase_id = #{lastPhraseId, jdbcType=INTEGER},
+                phrase_num = #{phraseNum, jdbcType=INTEGER},
+                dictation_id = #{dictationId, jdbcType=INTEGER},
+                dictation_num = #{dictationNum, jdbcType=INTEGER},
+                dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
+                dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
+                clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
+                created_by = #{createdBy, jdbcType=VARCHAR},
+                created_date = #{createdDate, jdbcType=TIMESTAMP},
+                updated_by = #{updatedBy, jdbcType=VARCHAR},
+                updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+                is_deleted = #{deleted, jdbcType=CHAR},
         </trim>
+                where id = #{id, jdbcType=VARCHAR}
     </update>
 
     <select id="selectByUserAndPlan" resultMap="BaseResultMap">

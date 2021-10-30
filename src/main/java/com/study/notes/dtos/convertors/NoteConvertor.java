@@ -12,12 +12,12 @@ public interface NoteConvertor {
     NoteConvertor  INSTANCE = Mappers.getMapper(NoteConvertor.class);
 
     /**
-     * 单个对象的转�?
+     * 单个对象的转�?
      **/
     NoteDto convert(NoteModel noteModel);
 
     /**
-    * 集合对象的转�?
+    * 集合对象的转�?
     **/
     List<NoteDto> convert(List<NoteModel> noteModels);
 }

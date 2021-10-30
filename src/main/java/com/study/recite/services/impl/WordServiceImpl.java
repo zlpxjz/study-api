@@ -1,7 +1,7 @@
 package com.study.recite.services.impl;
 
-import com.fasterapp.base.arch.service.BaseServiceImpl;
 import com.fasterapp.base.utils.CollectionUtil;
+import com.study.common.BaseServiceImpl;
 import com.study.recite.dtos.WordDto;
 import com.study.recite.dtos.convertors.WordConvertor;
 import com.study.recite.mappers.WordMapper;

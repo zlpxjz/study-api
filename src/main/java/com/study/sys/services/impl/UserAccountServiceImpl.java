@@ -1,8 +1,8 @@
 package com.study.sys.services.impl;
 
 import com.fasterapp.base.AppException;
-import com.fasterapp.base.arch.service.BaseServiceImpl;
 import com.fasterapp.base.utils.SecurityUtil;
+import com.study.common.BaseServiceImpl;
 import com.study.sys.mappers.UserAccountMapper;
 import com.study.sys.models.UserAccountModel;
 import com.study.sys.services.IUserAccountService;

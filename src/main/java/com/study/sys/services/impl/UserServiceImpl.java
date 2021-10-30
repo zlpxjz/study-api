@@ -1,9 +1,9 @@
 package com.study.sys.services.impl;
 
+import com.study.common.BaseServiceImpl;
 import com.study.sys.models.UserModel;
 import com.study.sys.mappers.UserMapper;
 import com.study.sys.services.IUserService;
-import com.fasterapp.base.arch.service.BaseServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

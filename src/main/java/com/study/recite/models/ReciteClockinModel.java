@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Entity(name = "ReciteClickin")
+@Entity(name = "ReciteClockin")
 @Table(name= "t_en_recite_clockin_info")
 public class ReciteClockinModel extends BaseModel<String> {
 	@Column(name="user_id", columnDefinition = "varchar(32) not null comment '用户ID'")

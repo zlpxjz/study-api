@@ -22,20 +22,20 @@ public class NoteApi extends BaseApi {
     @PostMapping(path="/save")
     public ApiResponse save(@RequestBody NoteModel model) throws Exception{
         noteService.save(model);
-        return ApiResponse.success().setMessage("保存成功�?");
+        return ApiResponse.success().setMessage("保存成功�?");
     }
 
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
     @GetMapping(path="/{id}/get")
-    public ApiResponse get(@PathVariable("id") Integer Id) throws Exception{
+    public ApiResponse get(@PathVariable("id") String Id) throws Exception{
         NoteModel model = noteService.getOne(Id);
         return ApiResponse.success(model);
     }
 
     @ApiOperation(value = "删除指定数据", notes = "删除指定数据")
     @GetMapping(path="/{id}/delete")
-    public ApiResponse delete(@PathVariable("id") Integer id) throws Exception{
+    public ApiResponse delete(@PathVariable("id") String id) throws Exception{
         noteService.delete(id);
-        return ApiResponse.success().setMessage("删除成功�?");
+        return ApiResponse.success().setMessage("删除成功�?");
     }
 }
