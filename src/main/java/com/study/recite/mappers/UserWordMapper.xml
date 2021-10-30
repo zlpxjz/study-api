@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.recite.mappers.UserWordMapper">
+    <resultMap id="BaseResultMap" type="com.study.recite.models.UserWordModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="word_id" jdbcType="VARCHAR" property="wordId" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="familiarity" jdbcType="CHAR" property="familiarity" />
+        <result column="is_wrong" jdbcType="CHAR" property="wrong" />
+        <result column="is_favorited" jdbcType="CHAR" property="favorited" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+        <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+        <result column="is_deleted" jdbcType="CHAR" property="deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        userWord.word_id ,
+        userWord.user_id ,
+        userWord.familiarity ,
+        userWord.is_wrong ,
+        userWord.is_favorited ,
+        userWord.id ,
+        userWord.created_by ,
+        userWord.created_date ,
+        userWord.updated_by ,
+        userWord.updated_date ,
+        userWord.is_deleted 
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_word_info userWord
+        where is_deleted = 'N'
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_word_info userWord
+        where is_deleted = 'N'
+         and id = #{id, jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        update t_user_word_info set is_deleted = 'Y'
+        where id = #{id, jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.study.recite.models.UserWordModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        insert into  t_user_word_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            word_id,
+            user_id,
+            familiarity,
+            is_wrong,
+            is_favorited,
+            id,
+            created_by,
+            created_date,
+            updated_by,
+            updated_date,
+            is_deleted,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{wordId, jdbcType=VARCHAR},
+            #{userId, jdbcType=VARCHAR},
+            #{familiarity, jdbcType=CHAR},
+            #{wrong, jdbcType=CHAR},
+            #{favorited, jdbcType=CHAR},
+            #{id, jdbcType=VARCHAR},
+            #{createdBy, jdbcType=VARCHAR},
+            #{createdDate, jdbcType=TIMESTAMP},
+            #{updatedBy, jdbcType=VARCHAR},
+            #{updatedDate, jdbcType=TIMESTAMP},
+            #{deleted, jdbcType=CHAR},
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="java.util.Map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        update  t_user_word_info set
+        <trim suffix=" " suffixOverrides=",">
+        <if test="_parameter.containsKey('wordId')">
+        word_id = #{wordId, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('userId')">
+        user_id = #{userId, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('familiarity')">
+        familiarity = #{familiarity, jdbcType=CHAR},
+        </if>
+        <if test="_parameter.containsKey('wrong')">
+        is_wrong = #{wrong, jdbcType=CHAR},
+        </if>
+        <if test="_parameter.containsKey('favorited')">
+        is_favorited = #{favorited, jdbcType=CHAR},
+        </if>
+        <if test="_parameter.containsKey('createdBy')">
+        created_by = #{createdBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('createdDate')">
+        created_date = #{createdDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('updatedBy')">
+        updated_by = #{updatedBy, jdbcType=VARCHAR},
+        </if>
+        <if test="_parameter.containsKey('updatedDate')">
+        updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+        </if>
+        <if test="_parameter.containsKey('deleted')">
+        is_deleted = #{deleted, jdbcType=CHAR},
+        </if>
+        </trim>
+        where id = #{id, jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.study.recite.models.UserWordModel">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        update  t_user_word_info set
+        <trim suffix=" " suffixOverrides=",">
+            word_id = #{wordId, jdbcType=VARCHAR},
+            user_id = #{userId, jdbcType=VARCHAR},
+            familiarity = #{familiarity, jdbcType=CHAR},
+            is_wrong = #{wrong, jdbcType=CHAR},
+            is_favorited = #{favorited, jdbcType=CHAR},
+            created_by = #{createdBy, jdbcType=VARCHAR},
+            created_date = #{createdDate, jdbcType=TIMESTAMP},
+            updated_by = #{updatedBy, jdbcType=VARCHAR},
+            updated_date = #{updatedDate, jdbcType=TIMESTAMP},
+            is_deleted = #{deleted, jdbcType=CHAR},
+        </trim>
+        where id = #{id, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByUserAndWord" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_word_info userWord
+        where is_deleted = 'N'
+        and user_id = #{userId, jdbcType=VARCHAR}
+        and word_id = #{wordId, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectWrongWordByUser" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_word_info userWord
+        where is_deleted = 'N'
+        and user_id = #{userId, jdbcType=VARCHAR}
+        and is_wrong = 'Y'
+    </select>
+
+    <select id="selectFavoiteWordByUser" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_word_info userWord
+        where is_deleted = 'N'
+        and user_id = #{userId, jdbcType=VARCHAR}
+        and is_favorited = 'Y'
+    </select>
+</mapper>
