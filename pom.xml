@@ -200,6 +200,23 @@
             </plugin>
 
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>com.study.ApplicationMain</mainClass>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>com.fasterapp</groupId>
                 <artifactId>fasterapp-generator</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
@@ -237,5 +254,7 @@
                 </includes>
             </resource>
         </resources>
+
+        <finalName>study-${project.version}</finalName>
     </build>
 </project>
