@@ -27,4 +27,30 @@ public class ReciteApi extends BaseApi {
         String userId = SessionContext.getUserId();
         return ApiResponse.success(reciteService.getReciteWords(userId, type));
     }
+
+    @GetMapping(path="/wrong/word/{wordId}")
+    public ApiResponse saveWrongWord(@PathVariable("wordId") String wordId) throws Exception{
+        String userId = SessionContext.getUserId();
+        reciteService.saveWrongWord(userId, wordId);
+
+        return ApiResponse.success();
+    }
+
+    @GetMapping(path="/favorite/word/{wordId}")
+    public ApiResponse saveFavoriteWord(@PathVariable("wordId") String wordId) throws Exception{
+        String userId = SessionContext.getUserId();
+
+        reciteService.saveFavoriteWord(userId, wordId);
+
+        return ApiResponse.success();
+    }
+
+    @GetMapping(path="/familiarity/word/{wordId}/{familiarity}")
+    public ApiResponse saveFamiliarityWord(@PathVariable("wordId") String wordId, @PathVariable("familiarity") String familiarity) throws Exception{
+        String userId = SessionContext.getUserId();
+
+        reciteService.saveFamiliarityWord(userId, wordId, familiarity);
+
+        return ApiResponse.success();
+    }
 }

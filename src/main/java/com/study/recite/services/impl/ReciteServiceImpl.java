@@ -5,18 +5,18 @@ import com.fasterapp.base.utils.CollectionUtil;
 import com.fasterapp.base.utils.DateUtil;
 import com.fasterapp.base.utils.StringUtil;
 import com.study.recite.dtos.WordDto;
-import com.study.recite.models.ReciteClockinModel;
-import com.study.recite.models.RecitePlanModel;
-import com.study.recite.services.IReciteClockinService;
-import com.study.recite.services.IRecitePlanService;
-import com.study.recite.services.IReciteService;
-import com.study.recite.services.IWordService;
+import com.study.recite.dtos.convertors.WordConvertor;
+import com.study.recite.models.*;
+import com.study.recite.services.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Tony on 2021/10/29.
@@ -33,10 +33,20 @@ public class ReciteServiceImpl implements IReciteService {
 	@Autowired
 	private IWordService wordService;
 
+	@Autowired
+	private IUserWordService userWordService;
+
+	@Autowired
+	private IWordContentService wordContentService;
+
 	@Override
 	public List<WordDto> getReciteWords(String userId, String type) throws Exception {
 		if("plan".equalsIgnoreCase(type)){
-			return this.getReciteWordsAsPlan(userId);
+			return this.getPlanedWord(userId);
+		}else if("wrong".equalsIgnoreCase(type)){
+			return this.getWrongWordList(userId);
+		}else if("favorite".equalsIgnoreCase(type)){
+			return this.getFavoriteWordList(userId);
 		}
 
 		return null;
@@ -48,7 +58,7 @@ public class ReciteServiceImpl implements IReciteService {
 	 * @return
 	 * @throws Exception
 	 */
-	private List<WordDto> getReciteWordsAsPlan(String userId) throws Exception {
+	private List<WordDto> getPlanedWord(String userId) throws Exception {
 		RecitePlanModel recitePlanModel = recitePlanService.getModel(userId);
 		if(recitePlanModel == null){
 			throw new AppException("1000", "没有可执行计划，请先制定学习计划");
@@ -89,12 +99,102 @@ public class ReciteServiceImpl implements IReciteService {
 		if(StringUtil.isNullOrBlank(firstWordId)){
 			firstWordId = "10000000";
 		}
-		List<WordDto> words = this.wordService.get(recitePlanModel.getBookId(), firstWordId, wordNum);
-		clockinModel.setFirstWordId(words.get(0).getWordId());
-		clockinModel.setLastWordId(words.get(words.size() - 1).getWordId());
-		clockinModel.setWordNum(words.size());
+		List<WordModel> words = this.wordService.get(recitePlanModel.getBookId(), firstWordId, wordNum);
+		List<WordDto> wordDtoList = get(words);
+
+		clockinModel.setFirstWordId(wordDtoList.get(0).getWordId());
+		clockinModel.setLastWordId(wordDtoList.get(words.size() - 1).getWordId());
+		clockinModel.setWordNum(wordDtoList.size());
 		reciteClockinService.save(clockinModel);
 
-		return words;
+		return wordDtoList;
+	}
+
+	/**
+	 *
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	private List<WordDto> getWrongWordList(String userId) throws Exception{
+		List<UserWordModel> userWordModelList = userWordService.getWrongWords(userId);
+		if(CollectionUtil.isEmpty(userWordModelList)){
+			return null;
+		}
+
+		List<String> wordIds = new ArrayList<>();
+		userWordModelList.stream().forEach(model -> wordIds.add(model.getWordId()));
+
+		List<WordModel> wordModelList = wordService.get(wordIds);
+
+		return get(wordModelList);
+	}
+
+	/**
+	 *
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	private List<WordDto> getFavoriteWordList(String userId) throws Exception{
+		List<UserWordModel> userWordModelList = userWordService.getFavoriteWords(userId);
+		if(CollectionUtil.isEmpty(userWordModelList)){
+			return null;
+		}
+
+		List<String> wordIds = new ArrayList<>();
+		userWordModelList.stream().forEach(model -> wordIds.add(model.getWordId()));
+
+		List<WordModel> wordModelList = wordService.get(wordIds);
+
+		return get(wordModelList);
+	}
+
+
+	private List<WordDto> get(List<WordModel> wordModelList) throws Exception{
+		List<WordDto> wordDtoList = new ArrayList<>();
+
+		Map<String, WordModel> wordModelMap = new HashMap<>();
+		List<String> wordIds = new ArrayList<>();
+		wordModelList.forEach(model -> {
+			wordModelMap.put(model.getId(), model);
+			wordIds.add(model.getId());
+		});
+
+		List<WordContentModel> wordContentModelList = wordContentService.get(wordIds);
+		if(CollectionUtil.isNotEmpty(wordContentModelList)){
+			List<WordContentModel> contentModelList = new ArrayList<>();
+			String wordId = null;
+			for(WordContentModel wordContentModel : wordContentModelList){
+				if(wordId != null && !wordContentModel.getWordId().equals(wordId)){
+					wordDtoList.add(WordConvertor.INSTANCE.convert(wordModelMap.get(wordId), contentModelList));
+					contentModelList.clear();
+				}
+
+				wordId = wordContentModel.getWordId();
+				contentModelList.add(wordContentModel);
+			}
+
+			if(CollectionUtil.isNotEmpty(contentModelList)) {
+				wordDtoList.add(WordConvertor.INSTANCE.convert(wordModelMap.get(wordId), contentModelList));
+			}
+		}
+
+		return wordDtoList;
+	}
+
+	@Override
+	public void saveWrongWord(String userId, String wordId) throws Exception {
+		userWordService.saveWrongWord(userId, wordId);
+	}
+
+	@Override
+	public void saveFavoriteWord(String userId, String wordId) throws Exception {
+		userWordService.saveFavoriteWord(userId, wordId);
+	}
+
+	@Override
+	public void saveFamiliarityWord(String userId, String wordId, String familiarity) throws Exception {
+		userWordService.saveFamiliarityWord(userId, wordId, familiarity);
 	}
 }

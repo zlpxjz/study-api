@@ -15,5 +15,13 @@ public interface IWordService extends IBaseService<String, WordModel> {
 	 * @return
 	 * @throws Exception
 	 */
-	List<WordDto> get(String bookId, String firstWordId, int size) throws Exception;
+	List<WordModel> get(String bookId, String firstWordId, int size) throws Exception;
+
+	/**
+	 *
+	 * @param wordIds
+	 * @return
+	 * @throws Exception
+	 */
+	List<WordModel> get(List<String> wordIds) throws Exception;
 }

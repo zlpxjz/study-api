@@ -151,4 +151,18 @@
         and word.id >= #{firstWordId, jdbcType=VARCHAR}
         limit #{size, jdbcType=INTEGER}
     </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_word_info word
+        WHERE word.is_deleted = 'N'
+        and word.id in
+        <foreach item="wordId" collection="wordIds" separator="," open="(" close=")" index="">
+            #{wordId, jdbcType=VARCHAR}
+        </foreach>
+    </select>
 </mapper>

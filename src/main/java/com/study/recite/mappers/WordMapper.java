@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface WordMapper extends BaseMapper<String, WordModel> {
 	List<WordModel> selectByBookAndFirstWordIdAndSize(@Param("bookId") String bookId, @Param("firstWordId") String firstWordId, @Param("size") int size);
+
+	List<WordModel> selectByIds(@Param("wordIds") List<String> wordIds);
 }
 

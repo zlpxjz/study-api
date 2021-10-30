@@ -16,4 +16,31 @@ public interface IReciteService {
 	 * @throws Exception
 	 */
 	List<WordDto> getReciteWords(String userId, String type) throws Exception;
+
+	/**
+	 *
+	 * @param userId
+	 * @param wordId
+	 * @throws Exception
+	 */
+	void saveWrongWord(String userId, String wordId) throws Exception;
+
+	/**
+	 *
+	 * @param userId
+	 * @param wordId
+	 * @throws Exception
+	 */
+	void saveFavoriteWord(String userId, String wordId) throws Exception;
+
+	/**
+	 *
+	 * @param userId
+	 * @param wordId
+	 * @throws Exception
+	 */
+	void saveFamiliarityWord(String userId, String wordId, String familiarity) throws Exception;
+
+
+
 }
