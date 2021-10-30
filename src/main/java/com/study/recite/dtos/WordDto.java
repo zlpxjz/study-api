@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class WordDto {
 	private String wordId;
 	private String word;
+	private Integer importance;
 
 	@JsonIgnore
 	List<WordContentDto> contents;

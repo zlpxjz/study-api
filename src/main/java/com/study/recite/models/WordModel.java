@@ -22,4 +22,7 @@ public class WordModel extends BaseModel<String> {
 
 	@Column(name="word_type", columnDefinition = "varchar(8) not null comment '类型:词汇/短语'")
 	private String  wordType;
+
+	@Column(name="importance", columnDefinition = "int(2) default 1 comment '重要性 1-5'")
+	private Integer importance;
 }
