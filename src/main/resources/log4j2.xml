@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration  status="WARN" monitorInterval="60">
+    <properties>
+        <property name="log.path">./logs</property>
+        <!--<property name="log.path">d:/logs</property>-->
+    </properties>
+
+    <Appenders>
+        <RollingFile name="RollingFileInfo" filename="${log.path}/api_info.log"
+                     filepattern="${log.path}/api_info_%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%X{UUID} %d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+
+        <!-- 所有访问日志信息-->
+        <RollingFile name="RollingAccessLogInfo" filename="${log.path}/api_access.log"
+                     filepattern="${log.path}/api_access_%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%X{UUID} %d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+
+        <!-- 所有访问异常信息-->
+        <RollingFile name="RollingExceptionLogInfo" filename="${log.path}/api_error.log"
+                     filepattern="${log.path}/api_error_%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%X{UUID} %d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+
+        <!-- 所有访问日志信息-->
+        <RollingFile name="RollingDBAccessLogInfo" filename="${log.path}/db_info.log"
+                     filepattern="${log.path}/db_info_%d{yyyyMMdd}.log">
+            <PatternLayout pattern="%X{UUID} %d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%X{UUID} %d{yyyy-MM-dd HH:mm:ss} %-5p %c:%L - %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="ApiAccessLogAdvice" level="info" additivity="false">
+            <!--<AppenderRef ref="Console"/>-->
+            <AppenderRef ref="RollingAccessLogInfo"/>
+        </Logger>
+
+        <Logger name="ApiExceptionAdvice" level="info" additivity="false">
+            <!--<AppenderRef ref="Console"/>-->
+            <AppenderRef ref="RollingExceptionLogInfo"/>
+        </Logger>
+
+        <Logger name="com.iris" level="info" additivity="false">
+            <!--<AppenderRef ref="Console"/>-->
+            <AppenderRef ref="RollingFileInfo"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

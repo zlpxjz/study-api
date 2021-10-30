@@ -1,0 +1,13 @@
+#mybatis:
+#  mapper-locations: classpath*:com/iris/uc/purchase/**/mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+#  configuration:
+#      log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: false
+    supportMethodsArguments: true
+    params: count=countSql
+
+

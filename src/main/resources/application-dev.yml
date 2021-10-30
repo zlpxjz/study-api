@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    #type: com.alibaba.druid.pool.DruidDataSource 采用DRUID的startup方式
+    #driver-class-name: com.mysql.jdbc.Driver 系统自动根据URL判断
+    url: jdbc:mysql://121.41.20.150:3306/iris_uc_purchase?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: ftp123456
+  #时间戳统一转换
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+server:
+    port: 8990
+    servlet:
+      context-path: /api/fronter/purchase/
+
+springfox.documentation.swagger.v2.path: /api-docs
+
+#外部系统连接配置
+
+endpoint:
+  msc:
+    mscUrl: http://120.26.46.194:8220/liveWebService/web
+  dbm:
+    username: live2poq
+    password: Livetopoq1
+    checkUrl: http://183.91.155.82:50010/RESTAdapter/UCI012/VehicleCheckIn
+
+  approval:
+    submitUrl: http://183.91.155.82:50888/DataInterface/LIVE/LiveService.asmx
+    cancelUrl: http://183.91.155.82:50888/api/WorkFlowOperate/RetractProcessByFolio
+    statusUrl: http://183.91.155.82:50888/api/FormData/GetModelDataByFolio
+    uploadUrl: http://183.91.155.82:50888/api/HrProcessData/UploadFile
+
+  auction:
+      url:  http://localhost:8080/auction
+
+  che300:
+    url:  http://testapi.che300.com
+    token:  3b4e17241497a86cc4014142ba82e341
+
+api:
+  file:
+    download:
+      server: d:/tmp/upload
+    upload:
+      path:  d:/tmp/upload
+
+      
+      
+      
