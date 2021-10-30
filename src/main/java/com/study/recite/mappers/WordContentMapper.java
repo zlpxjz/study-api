@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface WordContentMapper extends BaseMapper<String, WordContentModel> {
 	List<WordContentModel> selectByWord(@Param("wordId") String wordId);
+
+	List<WordContentModel> selectByWords(@Param("wordIds") List<String> wordIds);
 }
 

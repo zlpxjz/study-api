@@ -22,7 +22,8 @@ public class RecitePlanApi extends BaseApi {
     @ApiOperation(value = "保存数据", notes = "保存数据")
     @PostMapping(path="/save")
     public ApiResponse save(@RequestBody RecitePlanDto planDto) throws Exception{
-        recitePlanService.save(planDto);
+        String userId = SessionContext.getUserId();
+        recitePlanService.save(userId, planDto);
         return ApiResponse.success().setMessage("保存成功");
     }
 

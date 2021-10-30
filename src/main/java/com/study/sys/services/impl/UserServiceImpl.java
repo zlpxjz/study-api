@@ -12,5 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("UserProfileService")
 @Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl extends BaseServiceImpl<String, UserModel, UserMapper> implements IUserService {
-
+    @Override
+    public UserModel getByAccount(String accountId) throws Exception {
+        return mapper.selectByAccount(accountId);
+    }
 }

@@ -24,12 +24,13 @@ public class RecitePlanServiceImpl extends BaseServiceImpl<String, RecitePlanMod
 	private IBookService bookService;
 
 	@Override
-	public void save(RecitePlanDto planDto) throws Exception {
+	public void save(String userId, RecitePlanDto planDto) throws Exception {
 		String id = planDto.getId();
 
 		RecitePlanModel planModel = null;
 		if(id == null){
 			planModel = new RecitePlanModel();
+			planModel.setBookId(planDto.getBookId());
 		}else{
 			planModel = super.mapper.selectByPrimaryKey(id);
 		}
@@ -37,7 +38,7 @@ public class RecitePlanServiceImpl extends BaseServiceImpl<String, RecitePlanMod
 		planModel.setPlanPhraseNum(planDto.getPlanPhraseNum());
 		planModel.setPlanWordNum(planDto.getPlanWordNum());
 		planModel.setRepeatTimes(planDto.getRepeatTimes());
-
+		planModel.setUserId(userId);
 		super.save(planModel);
 	}
 

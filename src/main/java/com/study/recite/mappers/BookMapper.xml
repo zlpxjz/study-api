@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tool.study.mappers.BookMapper">
+<mapper namespace="com.study.recite.mappers.BookMapper">
     <resultMap id="BaseResultMap" type="com.study.recite.models.BookModel">
         <!--
           WARNING - @mbggenerated
@@ -185,7 +185,7 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_book_info
+        FROM t_book_info book
         WHERE is_deleted = 'N'
 
         <if test="phase != null and phase != '' " >

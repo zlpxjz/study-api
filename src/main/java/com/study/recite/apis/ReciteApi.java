@@ -23,7 +23,7 @@ public class ReciteApi extends BaseApi {
 
     @ApiOperation(value = "根据id获取信息", notes = "获取背诵单词")
     @GetMapping(path="/words/{type}")
-    public ApiResponse get(@PathVariable("type") Integer type) throws Exception{
+    public ApiResponse get(@PathVariable("type") String type) throws Exception{
         String userId = SessionContext.getUserId();
         return ApiResponse.success(reciteService.getReciteWords(userId, type));
     }

@@ -16,10 +16,6 @@
         <result column="first_phrase_id" jdbcType="INTEGER" property="firstPhraseId" />
         <result column="last_phrase_id" jdbcType="INTEGER" property="lastPhraseId" />
         <result column="phrase_num" jdbcType="INTEGER" property="phraseNum" />
-        <result column="dictation_id" jdbcType="INTEGER" property="dictationId" />
-        <result column="dictation_num" jdbcType="INTEGER" property="dictationNum" />
-        <result column="dictation_right_num" jdbcType="INTEGER" property="dictationRightNum" />
-        <result column="dictation_wrong_num" jdbcType="INTEGER" property="dictationWrongNum" />
         <result column="clockin_date" jdbcType="TIMESTAMP" property="clockinDate" />
         <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
         <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
@@ -42,10 +38,6 @@
         reciteClockin.first_phrase_id ,
         reciteClockin.last_phrase_id ,
         reciteClockin.phrase_num ,
-        reciteClockin.dictation_id ,
-        reciteClockin.dictation_num ,
-        reciteClockin.dictation_right_num ,
-        reciteClockin.dictation_wrong_num ,
         reciteClockin.clockin_date ,
         reciteClockin.id ,
         reciteClockin.created_by ,
@@ -85,7 +77,7 @@
                 where id = #{id, jdbcType=VARCHAR}
     </delete>
 
-    <insert id="insert" parameterType="com.tool.study.models.ReciteClickinModel">
+    <insert id="insert" parameterType="com.study.recite.models.ReciteClockinModel">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -101,10 +93,6 @@
                 first_phrase_id,
                 last_phrase_id,
                 phrase_num,
-                dictation_id,
-                dictation_num,
-                dictation_right_num,
-                dictation_wrong_num,
                 clockin_date,
                 id,
                 created_by,
@@ -123,10 +111,6 @@
                         #{firstPhraseId, jdbcType=INTEGER},
                         #{lastPhraseId, jdbcType=INTEGER},
                         #{phraseNum, jdbcType=INTEGER},
-                        #{dictationId, jdbcType=INTEGER},
-                        #{dictationNum, jdbcType=INTEGER},
-                        #{dictationRightNum, jdbcType=INTEGER},
-                        #{dictationWrongNum, jdbcType=INTEGER},
                         #{clockinDate, jdbcType=TIMESTAMP},
                         #{id, jdbcType=VARCHAR},
                         #{createdBy, jdbcType=VARCHAR},
@@ -171,18 +155,6 @@
                     <if test="_parameter.containsKey('phraseNum')">
                     phrase_num = #{phraseNum, jdbcType=INTEGER},
                     </if>
-                    <if test="_parameter.containsKey('dictationId')">
-                    dictation_id = #{dictationId, jdbcType=INTEGER},
-                    </if>
-                    <if test="_parameter.containsKey('dictationNum')">
-                    dictation_num = #{dictationNum, jdbcType=INTEGER},
-                    </if>
-                    <if test="_parameter.containsKey('dictationRightNum')">
-                    dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
-                    </if>
-                    <if test="_parameter.containsKey('dictationWrongNum')">
-                    dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
-                    </if>
                     <if test="_parameter.containsKey('clockinDate')">
                     clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
                     </if>
@@ -205,7 +177,7 @@
                 where id = #{id, jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.tool.study.models.ReciteClickinModel">
+    <update id="updateByPrimaryKey" parameterType="com.study.recite.models.ReciteClockinModel">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -221,10 +193,6 @@
                 first_phrase_id = #{firstPhraseId, jdbcType=INTEGER},
                 last_phrase_id = #{lastPhraseId, jdbcType=INTEGER},
                 phrase_num = #{phraseNum, jdbcType=INTEGER},
-                dictation_id = #{dictationId, jdbcType=INTEGER},
-                dictation_num = #{dictationNum, jdbcType=INTEGER},
-                dictation_right_num = #{dictationRightNum, jdbcType=INTEGER},
-                dictation_wrong_num = #{dictationWrongNum, jdbcType=INTEGER},
                 clockin_date = #{clockinDate, jdbcType=TIMESTAMP},
                 created_by = #{createdBy, jdbcType=VARCHAR},
                 created_date = #{createdDate, jdbcType=TIMESTAMP},
@@ -241,8 +209,8 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_en_recite_clockin_info
-        WHERE is_deleted = '0'
+        FROM t_en_recite_clockin_info reciteClockin
+        WHERE is_deleted = 'N'
         and user_id = #{userId, jdbcType=VARCHAR}
         and plan_id = #{planId, jdbcType=VARCHAR}
         order by clockin_date asc

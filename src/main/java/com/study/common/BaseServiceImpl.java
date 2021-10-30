@@ -14,16 +14,24 @@ import java.sql.Timestamp;
 public class BaseServiceImpl<K extends Serializable, E extends BaseModel, M extends BaseMapper<K, E>> extends com.fasterapp.base.arch.service.BaseServiceImpl<K, E, M> {
 	@Override
 	public void save(E model) throws Exception {
+		boolean isInsert = model.isInsert();
+
 		Timestamp ts = DateUtil.getTimestamp();
 		String userId = SessionContext.getUserId();
-		if(model.isInsert()){
+		if(isInsert){
 			model.setId(StringUtil.getUUID());
 			model.setCreatedBy(SessionContext.getUserId());
 			model.setCreatedDate(ts);
+			model.setDeleted("N");
 		}
 
 		model.setUpdatedBy(userId);
 		model.setUpdatedDate(ts);
-		super.save(model);
+
+		if(isInsert){
+			mapper.insert(model);
+		}else{
+			mapper.updateByPrimaryKey(model);
+		}
 	}
 }

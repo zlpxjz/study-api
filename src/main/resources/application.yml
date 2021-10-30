@@ -1,7 +1,7 @@
-#mybatis:
-#  mapper-locations: classpath*:com/iris/uc/purchase/**/mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
-#  configuration:
-#      log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+mybatis:
+  mapper-locations: classpath*:com/study/**/mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #pagehelper分页插件
 pagehelper:
@@ -9,5 +9,9 @@ pagehelper:
     reasonable: false
     supportMethodsArguments: true
     params: count=countSql
+
+logging:
+  config: classpath:log4j2.xml
+
 
 

@@ -10,7 +10,7 @@ public interface IRecitePlanService extends IBaseService<String, RecitePlanModel
 	 * @param planDto
 	 * @throws Exception
 	 */
-	void save(RecitePlanDto planDto) throws Exception;
+	void save(String userId, RecitePlanDto planDto) throws Exception;
 
 	/**
 	 *

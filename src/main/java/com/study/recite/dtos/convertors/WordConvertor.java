@@ -20,7 +20,8 @@ public interface WordConvertor {
 	List<WordDto> convert(List<WordModel> wordModel);
 
 	@Mappings({
-		@Mapping(source="wordModel.id", target="wordId")
+		@Mapping(source="wordModel.id", target="wordId"),
+		@Mapping(source="wordModel.word", target="word")
 	})
 	WordDto convert(WordModel wordModel, List<WordContentModel> contents);
 }

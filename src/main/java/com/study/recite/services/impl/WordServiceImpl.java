@@ -41,15 +41,15 @@ public class WordServiceImpl extends BaseServiceImpl<String, WordModel, WordMapp
 
 			List<WordContentModel> wordContentModelList = wordContentService.get(wordIds);
 			if(CollectionUtil.isNotEmpty(wordContentModelList)){
-				List<WordContentModel> contentModelList = null;
+				List<WordContentModel> contentModelList = new ArrayList<>();
 				String wordId = null;
 				for(WordContentModel wordContentModel : wordContentModelList){
-					if(wordId != null && !wordContentModel.getId().equals(wordId)){
+					if(wordId != null && !wordContentModel.getWordId().equals(wordId)){
 						wordDtoList.add(WordConvertor.INSTANCE.convert(wordModelMap.get(wordId), contentModelList));
-						wordId = wordContentModel.getWordId();
 						contentModelList.clear();
 					}
 
+					wordId = wordContentModel.getWordId();
 					contentModelList.add(wordContentModel);
 				}
 

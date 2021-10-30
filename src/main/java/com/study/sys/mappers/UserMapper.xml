@@ -8,9 +8,13 @@
         -->
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
         <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+        <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+        <result column="account_id" jdbcType="VARCHAR" property="accountId" />
+        <result column="portrait" jdbcType="VARCHAR" property="portrait" />
         <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
         <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
         <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
@@ -24,9 +28,13 @@
           This element is automatically generated when running, do not modify.
         -->
         user.real_name ,
+        user.nick_name ,
         user.phone ,
         user.email ,
-        user.user_id ,
+        user.sex ,
+        user.birthday ,
+        user.account_id ,
+        user.portrait ,
         user.id ,
         user.created_by ,
         user.created_date ,
@@ -45,7 +53,7 @@
         where is_deleted = 'N'
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -56,7 +64,7 @@
         and id = #{id, jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -73,9 +81,13 @@
         insert into  t_user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 real_name,
+                nick_name,
                 phone,
                 email,
-                user_id,
+                sex,
+                birthday,
+                account_id,
+                portrait,
                 id,
                 created_by,
                 created_date,
@@ -85,9 +97,13 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                         #{realName, jdbcType=VARCHAR},
+                        #{nickName, jdbcType=VARCHAR},
                         #{phone, jdbcType=VARCHAR},
                         #{email, jdbcType=VARCHAR},
-                        #{userId, jdbcType=VARCHAR},
+                        #{sex, jdbcType=VARCHAR},
+                        #{birthday, jdbcType=VARCHAR},
+                        #{accountId, jdbcType=VARCHAR},
+                        #{portrait, jdbcType=VARCHAR},
                         #{id, jdbcType=VARCHAR},
                         #{createdBy, jdbcType=VARCHAR},
                         #{createdDate, jdbcType=TIMESTAMP},
@@ -107,14 +123,26 @@
                     <if test="_parameter.containsKey('realName')">
                     real_name = #{realName, jdbcType=VARCHAR},
                     </if>
+                    <if test="_parameter.containsKey('nickName')">
+                    nick_name = #{nickName, jdbcType=VARCHAR},
+                    </if>
                     <if test="_parameter.containsKey('phone')">
                     phone = #{phone, jdbcType=VARCHAR},
                     </if>
                     <if test="_parameter.containsKey('email')">
                     email = #{email, jdbcType=VARCHAR},
                     </if>
-                    <if test="_parameter.containsKey('userId')">
-                    user_id = #{userId, jdbcType=VARCHAR},
+                    <if test="_parameter.containsKey('sex')">
+                    sex = #{sex, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('birthday')">
+                    birthday = #{birthday, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('accountId')">
+                    account_id = #{accountId, jdbcType=VARCHAR},
+                    </if>
+                    <if test="_parameter.containsKey('portrait')">
+                    portrait = #{portrait, jdbcType=VARCHAR},
                     </if>
                     <if test="_parameter.containsKey('createdBy')">
                     created_by = #{createdBy, jdbcType=VARCHAR},
@@ -143,9 +171,13 @@
         update  t_user_info set
         <trim suffix=" " suffixOverrides=",">
                 real_name = #{realName, jdbcType=VARCHAR},
+                nick_name = #{nickName, jdbcType=VARCHAR},
                 phone = #{phone, jdbcType=VARCHAR},
                 email = #{email, jdbcType=VARCHAR},
-                user_id = #{userId, jdbcType=VARCHAR},
+                sex = #{sex, jdbcType=VARCHAR},
+                birthday = #{birthday, jdbcType=VARCHAR},
+                account_id = #{accountId, jdbcType=VARCHAR},
+                portrait = #{portrait, jdbcType=VARCHAR},
                 created_by = #{createdBy, jdbcType=VARCHAR},
                 created_date = #{createdDate, jdbcType=TIMESTAMP},
                 updated_by = #{updatedBy, jdbcType=VARCHAR},
@@ -154,4 +186,15 @@
         </trim>
                 where id = #{id, jdbcType=VARCHAR}
     </update>
+
+    <select id="selectByAccount" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        select <include refid="Base_Column_List"/>
+        from t_user_info user
+        where is_deleted = 'N'
+        and account_id = #{accountId, jdbcType=VARCHAR}
+    </select>
 </mapper>

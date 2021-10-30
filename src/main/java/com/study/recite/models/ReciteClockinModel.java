@@ -45,18 +45,6 @@ public class ReciteClockinModel extends BaseModel<String> {
 	@Column(name="phrase_num", columnDefinition = "Integer(11) not null comment '短语数量'")
 	private Integer phraseNum;
 
-	@Column(name="dictation_id", columnDefinition = "Integer(11) not null comment '开始默写ID'")
-	private Integer dictationId;
-
-	@Column(name="dictation_num", columnDefinition = "Integer(11) not null comment '默写数量'")
-	private Integer dictationNum;
-
-	@Column(name="dictation_right_num", columnDefinition = "Integer(11) not null comment '打卡默写正确数量'")
-	private Integer dictationRightNum;
-
-	@Column(name="dictation_wrong_num", columnDefinition = "Integer(11) not null comment '打卡默写错误数量'")
-	private Integer dictationWrongNum;
-
 	@Column(name="clockin_date", columnDefinition = "timestamp default current_timestamp comment '打卡日期'")
 	private Date clockinDate;
 }

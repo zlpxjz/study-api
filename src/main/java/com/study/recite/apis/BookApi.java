@@ -30,7 +30,7 @@ public class BookApi extends BaseApi {
     }
 
     @ApiOperation(value = "根据id获取信息", notes = "查询数据库中某个信息")
-    @GetMapping(path="/get")
+    @PostMapping()
     public ApiResponse get(@RequestBody GetBookDto request) throws Exception{
         List<BookDto> response = bookService.get(request);
         return ApiResponse.success(response);

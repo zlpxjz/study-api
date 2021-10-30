@@ -34,8 +34,8 @@ public class ReciteServiceImpl implements IReciteService {
 	private IWordService wordService;
 
 	@Override
-	public List<WordDto> getReciteWords(String userId, int type) throws Exception {
-		if(type == 1){
+	public List<WordDto> getReciteWords(String userId, String type) throws Exception {
+		if("plan".equalsIgnoreCase(type)){
 			return this.getReciteWordsAsPlan(userId);
 		}
 
@@ -61,7 +61,7 @@ public class ReciteServiceImpl implements IReciteService {
 			clockinModel = new ReciteClockinModel();
 		}else{
 			clockinModel = clockinModelList.get(clockinModelList.size() - 1);
-			if(! DateUtil.format(clockinModel.getClockinDate(),"yyyy-MM-dd").equalsIgnoreCase(DateUtil.format(ts))){
+			if(! DateUtil.format(clockinModel.getClockinDate(),"yyyy-MM-dd").equalsIgnoreCase(DateUtil.format(ts, "yyyy-MM-dd"))){
 				clockinModel = new ReciteClockinModel();
 			}
 		}
@@ -80,12 +80,17 @@ public class ReciteServiceImpl implements IReciteService {
 		String firstWordId = null;
 		int size = clockinModelList.size(), num = 0, wordNum = 0;
 		for(int index = size - 1; index >= 0 && num++ < 3; index--){
-			firstWordId = clockinModelList.get(index).getFirstWordId();
+			if(StringUtil.isNotNullAndBlank(clockinModelList.get(index).getFirstWordId())) {
+				firstWordId = clockinModelList.get(index).getFirstWordId();
+			}
 			wordNum += clockinModelList.get(index).getWordNum();
 		}
 
+		if(StringUtil.isNullOrBlank(firstWordId)){
+			firstWordId = "10000000";
+		}
 		List<WordDto> words = this.wordService.get(recitePlanModel.getBookId(), firstWordId, wordNum);
-		clockinModel.setFirstPhraseId(words.get(0).getWordId());
+		clockinModel.setFirstWordId(words.get(0).getWordId());
 		clockinModel.setLastWordId(words.get(words.size() - 1).getWordId());
 		clockinModel.setWordNum(words.size());
 		reciteClockinService.save(clockinModel);

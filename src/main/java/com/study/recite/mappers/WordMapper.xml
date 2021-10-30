@@ -145,10 +145,10 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_en_word_info , t_en_book_word_info bookWord
-        WHERE is_deleted = 'N'
+        FROM t_en_word_info word , t_en_book_word_info bookWord
+        WHERE word.is_deleted = 'N'
         and bookWord.id = #{bookId, jdbcType=VARCHAR}
-        and t_en_word_info.id > #{wordId, jdbcType=VARCHAR}
+        and word.id >= #{firstWordId, jdbcType=VARCHAR}
         limit #{size, jdbcType=INTEGER}
     </select>
 </mapper>

@@ -31,7 +31,7 @@ public class SessionContext {
 
 	public static String getHeader(String key){
 		HttpServletRequest request = getRequest();
-		return request.getHeader(key).trim();
+		return request.getHeader(key);
 	}
 
 	/**

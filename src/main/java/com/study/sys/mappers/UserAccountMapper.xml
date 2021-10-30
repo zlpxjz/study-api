@@ -63,7 +63,7 @@
                 where id = #{id, jdbcType=VARCHAR}
     </delete>
 
-    <insert id="insert" parameterType="com.study.recite.models.UserModel">
+    <insert id="insert" parameterType="com.study.sys.models.UserModel">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -128,7 +128,7 @@
                 where id = #{id, jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.study.recite.models.UserModel">
+    <update id="updateByPrimaryKey" parameterType="com.study.sys.models.UserModel">
         <!--
           WARNING - @mbggenerated
           This element is automatically generated when running, do not modify.
@@ -153,7 +153,7 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_sys_user_info
+        FROM t_user_account_info userAccount
         WHERE is_deleted = 'N' and user_name = #{userName, jdbcType=VARCHAR}
     </select>
 </mapper>

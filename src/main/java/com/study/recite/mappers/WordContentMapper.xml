@@ -177,8 +177,26 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_en_word_content_info
+        FROM t_en_word_content_info wordContent
         WHERE is_deleted = 'N'
         and word_id = #{wordId, jdbcType=VARCHAR}
     </select>
+
+    <select id="selectByWords"  resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated when running, do not modify.
+        -->
+        SELECT <include refid="Base_Column_List"/>
+        FROM t_en_word_content_info wordContent
+        WHERE is_deleted = 'N'
+        and word_id in
+
+        <foreach item="wordId" collection="wordIds" separator="," open="(" close=")" index="">
+          #{wordId, jdbcType=VARCHAR}
+        </foreach>
+        order by wordContent.word_id asc
+    </select>
+
+
 </mapper>

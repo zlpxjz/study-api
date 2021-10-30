@@ -225,7 +225,7 @@
           This element is automatically generated when running, do not modify.
         -->
         SELECT <include refid="Base_Column_List"/>
-        FROM t_en_recite_plan_info
+        FROM t_en_recite_plan_info recitePlan
         WHERE is_deleted = 'N'
 
         <if test="userId.length > 0">

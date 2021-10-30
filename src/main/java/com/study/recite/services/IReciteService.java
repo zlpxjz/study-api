@@ -15,5 +15,5 @@ public interface IReciteService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<WordDto> getReciteWords(String userId, int type) throws Exception;
+	List<WordDto> getReciteWords(String userId, String type) throws Exception;
 }

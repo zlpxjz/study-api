@@ -64,18 +64,18 @@
 
     <Loggers>
         <Logger name="ApiAccessLogAdvice" level="info" additivity="false">
-            <!--<AppenderRef ref="Console"/>-->
-            <AppenderRef ref="RollingAccessLogInfo"/>
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="RollingAccessLogInfo"/>-->
         </Logger>
 
         <Logger name="ApiExceptionAdvice" level="info" additivity="false">
-            <!--<AppenderRef ref="Console"/>-->
-            <AppenderRef ref="RollingExceptionLogInfo"/>
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="RollingExceptionLogInfo"/>-->
         </Logger>
 
         <Logger name="com.iris" level="info" additivity="false">
-            <!--<AppenderRef ref="Console"/>-->
-            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="RollingFileInfo"/>-->
         </Logger>
 
         <Root level="info">

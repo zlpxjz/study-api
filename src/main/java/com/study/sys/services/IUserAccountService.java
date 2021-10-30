@@ -8,6 +8,27 @@ import com.study.sys.dtos.UserDto;
 public interface IUserAccountService extends IBaseService<String, UserAccountModel> {
 	/**
 	 *
+	 * @param userDto
+	 * @throws Exception
+	 */
+	void register(UserDto userDto) throws Exception;
+
+	/**
+	 *
+	 * @param userDto
+	 * @throws Exception
+	 */
+	void update(UserDto userDto) throws Exception;
+
+	/**
+	 *
+	 * @param userDto
+	 * @throws Exception
+	 */
+	void reset(UserDto userDto) throws Exception;
+
+	/**
+	 *
 	 * @param request
 	 * @return
 	 * @throws Exception
