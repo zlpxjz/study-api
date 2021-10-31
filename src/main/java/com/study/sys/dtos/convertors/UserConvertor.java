@@ -14,6 +14,7 @@ public interface UserConvertor {
 
     @Mappings({
         @Mapping(source="userModel.nickName", target="nickName"),
+        @Mapping(source="userModel.id", target="userId")
     })
     UserDto convert(UserAccountModel accountModel, UserModel userModel);
 }

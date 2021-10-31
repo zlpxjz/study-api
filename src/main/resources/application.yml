@@ -1,5 +1,5 @@
 mybatis:
-  mapper-locations: classpath*:com/study/**/mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  mapper-locations: classpath*:com/study/**/mappers/*.xml,classpath*:com/fasterapp/**/mappers/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
   configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
@@ -14,4 +14,7 @@ logging:
   config: classpath:log4j2.xml
 
 
+fasterapp:
+  logger:
+    headers: user_id,user_name,token
 

@@ -54,17 +54,26 @@ public class UserAccountServiceImpl extends BaseServiceImpl<String, UserAccountM
 
 	@Override
 	public UserDto login(LoginDto request) throws Exception {
-		String userName = request.getUserName(), password = request.getPassword();
+		String userName = request.getUserName(), password = request.getPassword(), token = request.getToken();
 
 		UserAccountModel userAccountModel = super.mapper.selectByUserName(userName);
 		if(userAccountModel == null){
 			throw new AppException("输入账号无效，请重新输入");
 		}
 
-		String encryptPwd = SecurityUtil.encrypt(password);
-		if(! encryptPwd.equals(userAccountModel.getPassword())){
-			throw new AppException("输入账号无效，请重新输入");
+		if(! StringUtil.isNullOrBlank(password)) {
+			String encryptPwd = SecurityUtil.encrypt(password);
+			if (!encryptPwd.equals(userAccountModel.getPassword())) {
+				throw new AppException("输入账号无效，请重新输入");
+			}
+		}else{
+			if(! userAccountModel.getToken().equalsIgnoreCase(token)){
+				throw new AppException("账号无效，请重新登录");
+			}
 		}
+
+		userAccountModel.setToken(StringUtil.getUUID());
+		this.save(userAccountModel);
 
 		UserModel userModel = this.userService.getByAccount(userAccountModel.getId());
 		userAccountModel.setPassword(null);

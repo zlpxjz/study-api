@@ -69,10 +69,12 @@ public class ReciteServiceImpl implements IReciteService {
 		List<ReciteClockinModel> clockinModelList = reciteClockinService.get(userId, recitePlanModel.getId());
 		if(CollectionUtil.isEmpty(clockinModelList) ){
 			clockinModel = new ReciteClockinModel();
+			clockinModel.setFirstWordId("00000000");
 		}else{
 			clockinModel = clockinModelList.get(clockinModelList.size() - 1);
 			if(! DateUtil.format(clockinModel.getClockinDate(),"yyyy-MM-dd").equalsIgnoreCase(DateUtil.format(ts, "yyyy-MM-dd"))){
 				clockinModel = new ReciteClockinModel();
+				clockinModel.setFirstWordId(clockinModelList.get(clockinModelList.size()-1).getLastWordId());
 			}
 		}
 
@@ -102,9 +104,7 @@ public class ReciteServiceImpl implements IReciteService {
 		List<WordModel> words = this.wordService.get(recitePlanModel.getBookId(), firstWordId, wordNum);
 		List<WordDto> wordDtoList = get(words);
 
-		clockinModel.setFirstWordId(wordDtoList.get(0).getWordId());
 		clockinModel.setLastWordId(wordDtoList.get(words.size() - 1).getWordId());
-		clockinModel.setWordNum(wordDtoList.size());
 		reciteClockinService.save(clockinModel);
 
 		return wordDtoList;

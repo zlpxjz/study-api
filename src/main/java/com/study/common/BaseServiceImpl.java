@@ -25,7 +25,9 @@ public class BaseServiceImpl<K extends Serializable, E extends BaseModel, M exte
 			model.setDeleted("N");
 		}
 
-		model.setUpdatedBy(userId);
+		if(StringUtil.isNotNullAndBlank(userId)) {
+			model.setUpdatedBy(userId);
+		}
 		model.setUpdatedDate(ts);
 
 		if(isInsert){

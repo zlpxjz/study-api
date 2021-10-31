@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages="com.study")
-@MapperScan({"com.study.**.mappers"})
+@SpringBootApplication(scanBasePackages={"com.study","com.fasterapp"})
+@MapperScan({"com.study.**.mappers","com.fasterapp.**.mappers"})
 public class ApplicationMain extends SpringBootServletInitializer implements WebMvcConfigurer {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationMain.class,args);
