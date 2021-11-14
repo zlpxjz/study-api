@@ -1,5 +1,6 @@
 package com.study.recite.services;
 
+import com.study.recite.dtos.ReciteClockinDto;
 import com.study.recite.dtos.WordDto;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface IReciteService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<WordDto> getReciteWords(String userId, String type) throws Exception;
+	ReciteClockinDto getReciteWords(String userId, String type) throws Exception;
 
 	/**
 	 *

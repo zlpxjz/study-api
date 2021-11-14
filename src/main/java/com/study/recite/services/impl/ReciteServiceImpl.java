@@ -4,7 +4,9 @@ import com.fasterapp.base.AppException;
 import com.fasterapp.base.utils.CollectionUtil;
 import com.fasterapp.base.utils.DateUtil;
 import com.fasterapp.base.utils.StringUtil;
+import com.study.recite.dtos.ReciteClockinDto;
 import com.study.recite.dtos.WordDto;
+import com.study.recite.dtos.convertors.ReciteClockinConvertor;
 import com.study.recite.dtos.convertors.WordConvertor;
 import com.study.recite.models.*;
 import com.study.recite.services.*;
@@ -40,16 +42,13 @@ public class ReciteServiceImpl implements IReciteService {
 	private IWordContentService wordContentService;
 
 	@Override
-	public List<WordDto> getReciteWords(String userId, String type) throws Exception {
-		if("plan".equalsIgnoreCase(type)){
-			return this.getPlanedWord(userId);
-		}else if("wrong".equalsIgnoreCase(type)){
-			return this.getWrongWordList(userId);
-		}else if("favorite".equalsIgnoreCase(type)){
-			return this.getFavoriteWordList(userId);
-		}
+	public ReciteClockinDto getReciteWords(String userId, String type) throws Exception {
+        ReciteClockinDto reciteClockinDto = this.getPlanedWord(userId);
 
-		return null;
+        reciteClockinDto.getWords().addAll(this.getWrongWordList(userId));
+        reciteClockinDto.getWords().addAll(this.getFavoriteWordList(userId));
+
+		return reciteClockinDto;
 	}
 
 	/**
@@ -58,7 +57,7 @@ public class ReciteServiceImpl implements IReciteService {
 	 * @return
 	 * @throws Exception
 	 */
-	private List<WordDto> getPlanedWord(String userId) throws Exception {
+	private ReciteClockinDto getPlanedWord(String userId) throws Exception {
 		RecitePlanModel recitePlanModel = recitePlanService.getModel(userId);
 		if(recitePlanModel == null){
 			throw new AppException("1000", "没有可执行计划，请先制定学习计划");
@@ -107,7 +106,7 @@ public class ReciteServiceImpl implements IReciteService {
 		clockinModel.setLastWordId(wordDtoList.get(words.size() - 1).getWordId());
 		reciteClockinService.save(clockinModel);
 
-		return wordDtoList;
+		return ReciteClockinConvertor.INSTANCE.convert(clockinModel, wordDtoList);
 	}
 
 	/**

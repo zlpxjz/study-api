@@ -45,6 +45,9 @@ public class ReciteClockinModel extends BaseModel<String> {
 	@Column(name="phrase_num", columnDefinition = "Integer(11) not null comment '短语数量'")
 	private Integer phraseNum;
 
+	@Column(name="clockin_num", columnDefinition = "Integer(11) not null comment '打卡次数'")
+	private Integer clockinNum;
+
 	@Column(name="clockin_date", columnDefinition = "timestamp default current_timestamp comment '打卡日期'")
 	private Date clockinDate;
 }
