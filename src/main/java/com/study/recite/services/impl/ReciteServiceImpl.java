@@ -106,6 +106,7 @@ public class ReciteServiceImpl implements IReciteService {
 		clockinModel.setLastWordId(wordDtoList.get(words.size() - 1).getWordId());
 		reciteClockinService.save(clockinModel);
 
+
 		return ReciteClockinConvertor.INSTANCE.convert(clockinModel, wordDtoList);
 	}
 
